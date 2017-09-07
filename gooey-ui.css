@@ -53,8 +53,6 @@ blockquote, q {
 /*            Layout             */
 /*********************************/
 
-html, body:
-
 .gw-row {
 	display: flex;
 	flex-direction: row;
@@ -149,6 +147,10 @@ html, body:
 
 html, body {
 	height: 100vh;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 .gw-wrapper {
