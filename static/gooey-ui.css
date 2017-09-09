@@ -49,6 +49,8 @@ blockquote, q {
 	quotes: "" "";
 }
 
+
+
 /*********************************/
 /*            Layout             */
 /*********************************/
@@ -86,6 +88,8 @@ blockquote, q {
 .gw-row.gw-right-h {
 	justify-content: flex-end;
 }
+
+
 
 /*********************************/
 /*    Header, Footer, Article    */
@@ -168,6 +172,8 @@ body {
 	height: auto;
 	min-height: 100%;
 }
+
+
 
 /*********************************/
 /*       Forms and Fields        */
