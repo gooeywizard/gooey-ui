@@ -27,15 +27,15 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+//      {
+//        test: /\.(js|vue)$/,
+//        loader: 'eslint-loader',
+//        enforce: 'pre',
+//        include: [resolve('src'), resolve('test')],
+//        options: {
+//          formatter: require('eslint-friendly-formatter')
+//        }
+//      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -46,6 +46,19 @@ module.exports = {
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },
+//			{
+//				test: /\.s[a|c]ss$/,
+//				use: {
+//					'style-loader',
+//					'css-loader',
+//					{
+//						loader: 'sass-loader'
+////						options: {
+////        			includePaths: [path.resolve(__dirname, 'node_modules')],
+////      			}
+//					}
+//				}
+//			},
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -71,5 +84,5 @@ module.exports = {
         }
       }
     ]
-  }
+	}
 }
