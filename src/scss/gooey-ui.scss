@@ -410,7 +410,7 @@ body {
 	margin: 8px;
 }
 
-.gw-field.has-focus .gw-input {
+.gw-field.has-focus .gw-input input {
 /* 	border-color: #5cb3fd; */
 	border-color: #0047c1;
 }
@@ -420,7 +420,7 @@ body {
 	color: #0047c1;
 }
 
-.gw-field.dirty.invalid.touched .gw-input {
+.gw-field.dirty.invalid.touched .gw-input input {
 /* 	border-color: #a94442; */
 	border-color: #c10000;
 }
@@ -431,7 +431,7 @@ body {
 	color: #c10000;
 }
 
-.gw-field.dirty.touched.valid .gw-input {
+.gw-field.dirty.touched.valid .gw-input input {
 /* 	border-color: #00c139; */
 	border-color: #01ad33;
 }
@@ -442,7 +442,7 @@ body {
 }
 
 .gw-input {
-	border-bottom: 1px solid lightslategray;
+//	border-bottom: 1px solid lightslategray;
 	transition: border-color 0.2s ease;
 	display: flex;
 	/*   background-color: white; */
@@ -490,6 +490,7 @@ body {
 	height: 25px;
 	outline: none;
 	border: none;
+	border-bottom: 1px solid lightslategray;
 	width: 100%;
 	margin-top: 14px;
 	font-size: 14px;
@@ -503,21 +504,10 @@ body {
 	color: black;
 }
 
-.gw-field.border .gw-input {
+.gw-field.border input {
   border: 1px solid lightslategray;
-}
-
-.gw-field.border .gw-input input {
-  margin-top: 6px;
-}
-
-.gw-field.border .gw-input label {
-  margin-top: 14px;
-}
-
-.gw-field.border.has-focus .gw-input label,
-.gw-field.border.has-value .gw-input label{
-  margin-top: -7px;
+	padding-top: 7px;
+	margin-top: 6px;
 }
 
 .gw-field label {
