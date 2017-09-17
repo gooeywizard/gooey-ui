@@ -132,5 +132,5 @@
 </script>
 
 <style lang="scss">
-	@import '../src/scss/gooey-ui.scss'
+	@import '../src/assets/scss/gooey-ui.scss'
 </style>

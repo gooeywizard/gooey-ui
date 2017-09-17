@@ -1,10 +1,12 @@
 {
   "name": "gooey-ui",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "GooeyWizard <forgivenson@gmail.com>",
-  "private": true,
+  "version": "0.1.0",
+  "description": "A modern UI for modern browsers.",
+  "author": "GooeyWizard <thegooeywizard@gmail.com>",
+  "private": false,
+	"main": "dist/gooey-ui.js",
   "scripts": {
+		"module": "webpack --config build/webpack.module.conf.js",
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
