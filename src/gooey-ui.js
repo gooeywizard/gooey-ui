@@ -11,10 +11,8 @@ export {
 }
 
 export default {
-	GooeyUI: {
-		GwInput: GwInput,
-		GwCheckbox: GwCheckbox,
-		GwMenu: GwMenu,
-		GwGrid: GwGrid
-	}
+	GwInput: GwInput,
+	GwCheckbox: GwCheckbox,
+	GwMenu: GwMenu,
+	GwGrid: GwGrid
 }
