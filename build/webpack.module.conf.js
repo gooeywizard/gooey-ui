@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var commonConfig = {
   output: {
@@ -18,10 +19,26 @@ var commonConfig = {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
-      {
-        test: /\.css$/,
-        loader: 'style!less!css'
-      }
+//			{
+//				test: /\.scss$/,
+//				use: [{
+////						loader: "style-loader" // creates style nodes from JS strings
+////				}, {
+////						loader: "css-loader" // translates CSS into CommonJS
+////				}, {
+//						loader: "sass-loader", // compiles Sass to CSS
+//						options: {
+//							includePaths: ["../src/assets/scss"]
+//						}
+//				}]
+//			},
+			{
+				test: /\.scss$/,
+				use: ExtractTextPlugin.extract({
+//					fallback: "style-loader",
+					use: "css-loader!sass-loader",
+				})
+			}
     ]
   },
 	externals: {
@@ -57,6 +74,9 @@ module.exports = [
       // These options are useful if the user wants to load the module with AMD
       library: 'gooey-ui',
       umdNamedDefine: true
-    }
+    },
+		plugins: [
+			new ExtractTextPlugin('gooey-ui.css')
+		]
   })
 ];
