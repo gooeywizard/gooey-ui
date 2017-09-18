@@ -24,6 +24,9 @@ var commonConfig = {
       }
     ]
   },
+	externals: {
+		'vee-validate': 'vee-validate'
+	},
   plugins: [
     new webpack.optimize.UglifyJsPlugin( {
       minimize : true,
@@ -45,10 +48,10 @@ module.exports = [
 
   // Config 2: For Node-based development environments
   merge(commonConfig, {
-		entry: path.resolve(__dirname + '/../src/components/gw-grid.vue'),
+		entry: path.resolve(__dirname + '/../src/gooey-ui.js'),
 		output: {
 			path: path.resolve(__dirname + '/../dist/'),
-			filename: 'gooey-ui.js',
+			filename: 'gooey-ui.min.js',
       libraryTarget: 'umd',
 
       // These options are useful if the user wants to load the module with AMD
