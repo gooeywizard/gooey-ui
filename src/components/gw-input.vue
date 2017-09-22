@@ -14,12 +14,12 @@
 			<!-- date -->
 			<input v-if="type === 'date'" type="date" :id="inputId" v-model="value" :name="name" v-validate="validate||''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
       
-      <!-- checkbox -->
-      <input v-if="type === 'checkbox'" type="checkbox" :id="inputId" :name="name" v-model="value">
-			
-			<label :class="{ 'gw-field-label': type !== 'checkbox' }" :for="inputId">{{ label }}<span v-if="errorMsg && errors.has(name) && fields[name].dirty && fields[name].touched"> - {{ errorMsg }}</span></label>
+			<label class="gw-field-label" :for="inputId">{{ label }}</label>
 			
 		</div>
+		
+		<div class="gw-field-feedback" v-if="errorMsg && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMsg }}</div>
+		
 	</div>
 </template>
 
@@ -65,6 +65,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/*
 h1, h2 {
   font-weight: normal;
 }
@@ -82,4 +83,5 @@ li {
 a {
   color: #42b983;
 }
+*/
 </style>
