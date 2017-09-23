@@ -272,7 +272,14 @@ body {
   font-family: 'Roboto', sans-serif; }
 
 .gw-wrapper {
-  height: 100%; }
+  height: 100%;
+  background-color: inherit; }
+
+.gw-body {
+  background-color: inherit; }
+
+.gw-main-content {
+  background-color: inherit; }
 
 .gw-footer.sticky {
   position: sticky;
@@ -288,15 +295,16 @@ body {
 /*       Forms and Fields        */
 /*********************************/
 .gw-field {
-  margin: 8px; }
+  margin: 8px;
+  padding-bottom: 16px;
+  background-color: inherit; }
+
+.gw-field.dirty.touched.invalid {
+  padding-bottom: 0px; }
 
 .gw-field.has-focus .gw-input input {
   /* 	border-color: #5cb3fd; */
   border-color: #0047c1; }
-
-.gw-field.has-focus label {
-  /* 	color: #5cb3fd; */
-  color: #0047c1; }
 
 .gw-field.dirty.invalid.touched .gw-input input {
   /* 	border-color: #a94442; */
@@ -318,7 +326,7 @@ body {
 .gw-input {
   transition: border-color 0.2s ease;
   display: flex;
-  /*   background-color: white; */
+  background-color: inherit;
   cursor: text; }
 
 .gw-field.no-error .gw-input {
@@ -335,15 +343,20 @@ body {
   transition: font-size 0.24s ease, margin-top 0.2s ease;
   pointer-events: none; }
 
+.gw-field.has-focus label {
+  color: #0047c1; }
+
 .gw-field.has-focus label,
-.gw-field.has-value label {
-  /* 	font-size: 12px; */
+.gw-field.has-value label,
+.gw-field.border.has-focus label,
+.gw-field.border.has-value label {
   margin-top: 1px; }
 
-.gw-field-feedback {
+.gw-field .gw-field-feedback {
   font-size: 13px;
   margin-top: 2px;
-  margin-left: 5px; }
+  margin-left: 8px;
+  height: 14px; }
 
 .gw-field.no-error .gw-field-feedback {
   color: #3c763d; }
@@ -352,7 +365,7 @@ body {
   color: #a94442; }
 
 .gw-input input {
-  padding: 0px 5px 0px 5px;
+  padding: 0px 8px 4px 8px;
   height: 25px;
   outline: none;
   border: none;
@@ -360,7 +373,7 @@ body {
   width: 100%;
   margin-top: 14px;
   font-size: 14px;
-  background-color: transparent;
+  background-color: inherit;
   color: transparent;
   transition: color 0.3s ease; }
 
@@ -370,14 +383,18 @@ body {
 
 .gw-field.border input {
   border: 1px solid lightslategray;
+  border-radius: 3px;
   padding-top: 7px;
   margin-top: 6px; }
 
 .gw-field label {
-  background-color: white;
+  background-color: inherit;
   padding-left: 2px;
   padding-right: 2px;
-  margin-left: 3px; }
+  margin-left: 6px; }
+
+.gw-field.border label {
+  margin-top: 19px; }
 
 .gw-checkbox {
   display: flex;
@@ -430,14 +447,17 @@ body {
 
 .gw-box-header {
   padding: 12px;
-  border-bottom: 1px solid #CCC; }
+  border-bottom: 1px solid #CCC;
+  background-color: inherit; }
 
 .gw-box-body {
-  padding: 8px; }
+  padding: 8px;
+  background-color: inherit; }
 
 .gw-box-footer {
   padding: 12px;
-  border-top: 1px solid #CCC; }
+  border-top: 1px solid #CCC;
+  background-color: inherit; }
 
 .gw-fill {
   flex-basis: 100%; }
