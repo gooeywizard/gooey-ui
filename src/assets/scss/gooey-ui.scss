@@ -475,6 +475,12 @@ body {
 	pointer-events: none;
 }
 
+.gw-input label.left {
+	position: relative;
+	margin: 0px;
+	left: 0px;
+}
+
 .gw-field.has-focus label {
 	color: #0047c1;
 }

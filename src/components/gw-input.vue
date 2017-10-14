@@ -3,18 +3,18 @@
 		<div class="gw-input">
 			
 			<!-- text -->
-			<input v-if="type === 'text'" type="text" :id="inputId" v-model="value" :name="name" v-validate="validate" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'text'" type="text" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
 			
 			<!-- email -->
-			<input v-if="type === 'email'" type="email" :id="inputId" v-model="value" :name="name" v-validate="validate" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'email'" type="email" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
 			
 			<!-- password -->
-			<input v-if="type === 'password'" type="password" :id="inputId" v-model="value" :name="name" v-validate="validate" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'password'" type="password" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
 			
 			<!-- date -->
-			<input v-if="type === 'date'" type="date" :id="inputId" v-model="value" :name="name" v-validate="validate||''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'date'" type="date" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
       
-			<label class="gw-field-label" :for="inputId">{{ label }}</label>
+			<label v-if="label" class="gw-field-label" :class="getLabelClasses()" :for="inputId">{{ label }}</label>
 			
 		</div>
 		
@@ -33,7 +33,7 @@
 				inputId: this._uid + '-input'
 			}
 		},
-		props: ['label','validate','type','name','error-msg'],
+		props: ['label','validate','type','name','error-msg','label-position'],
 		methods: {
 			focusHandler: function() {
 				this.$data.hasFocus = true;
@@ -58,6 +58,15 @@
 				}
 
 				return {};
+			},
+			getLabelClasses: function() {
+				let classes = {};
+				
+				if(this.$props.labelPosition) {
+					classes[this.$props.labelPosition] = true;
+				}
+				
+				return classes;
 			}
 		}
 	}

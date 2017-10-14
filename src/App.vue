@@ -24,6 +24,12 @@
 					
 					<gw-input type="text" class="border" label="Full Border Example" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
 					
+					<gw-input type="text" label="No Validation" name="noValidation"></gw-input>
+					
+					<gw-input type="text" label="No Validation Border" name="noValidationBorder" class="border"></gw-input>
+					
+					<gw-input type="text" name="noLabel" class=""></gw-input>
+					
 					<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
 				</div>
 			</div>
@@ -34,9 +40,9 @@
 				</div>
 				<div class="gw-box-body">
 					<button type="button" class="gw-btn">Default</button>
-					<button type="button" class="gw-btn gw-color-primary">Primary</button>
-					<button type="button" class="gw-btn gw-color-green">Green</button>
-					<button type="button" class="gw-btn gw-color-red">Red</button>
+					<button type="button" class="gw-btn primary">Primary</button>
+					<button type="button" class="gw-btn success">Success</button>
+					<button type="button" class="gw-btn error">Error</button>
 				</div>
 				<div class="gw-box-body">
 					<gw-menu>
