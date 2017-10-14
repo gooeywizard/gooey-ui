@@ -3,17 +3,17 @@
 		<div class="gw-input">
 			
 			<!-- text -->
-			<input v-if="type === 'text'" type="text" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'text'" type="text" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
 			
 			<!-- email -->
-			<input v-if="type === 'email'" type="email" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'email'" type="email" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
 			
 			<!-- password -->
-			<input v-if="type === 'password'" type="password" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
+			<input v-if="type === 'password'" type="password" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
 			
 			<!-- date -->
-			<input v-if="type === 'date'" type="date" :id="inputId" v-model="value" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()">
-      
+			<input v-if="type === 'date'" type="date" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
+			
 			<label v-if="label" class="gw-field-label" :class="getLabelClasses()" :for="inputId">{{ label }}</label>
 			
 		</div>
@@ -28,13 +28,15 @@
 		name: 'gw-input',
 		data () {
 			return {
-				value: '',
 				hasFocus: false,
 				inputId: this._uid + '-input'
 			}
 		},
-		props: ['label','validate','type','name','error-msg','label-position'],
+		props: ['label','validate','type','name','error-msg','label-position','value'],
 		methods: {
+			updateValue: function() {
+				this.$emit('input', this.$refs.input.value);
+			},
 			focusHandler: function() {
 				this.$data.hasFocus = true;
 			},
@@ -53,7 +55,7 @@
 						'invalid': input.invalid,
 						'valid': input.valid,
 						'has-focus': this.$data.hasFocus,
-						'has-value': this.$data.value.length > 0
+						'has-value': this.$refs.input.value.length > 0
 					};
 				}
 

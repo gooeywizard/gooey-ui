@@ -15,7 +15,7 @@
 
 				<div class="gw-box-body">
 					<gw-input type="text" label="Full Name" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
-
+					
 					<gw-input type="email" label="Email Address" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
 
 					<gw-input type="password" label="Password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
@@ -55,6 +55,18 @@
 			
 			<div class="gw-box shadow">
 				<div class="gw-box-header">
+					<h4>Lists</h4>
+				</div>
+				<div class="gw-box-body">
+					<gw-list>
+						<li class="gw-list-item">Result 1</li>
+						<li class="gw-list-item">Result 2</li>
+					</gw-list>
+				</div>
+			</div>
+			
+			<div class="gw-box shadow">
+				<div class="gw-box-header">
 					<h4>Grids</h4>
 				</div>
 				<div class="gw-box-body">
@@ -73,6 +85,7 @@
 	import GwCheckbox from './components/gw-checkbox.vue'
 	import GwMenu from './components/gw-menu.vue'
 	import GwGrid from './components/gw-grid.vue'
+	import GwList from './components/gw-list.vue'
 	
 	export default {
 		name: 'app',
@@ -80,7 +93,8 @@
 			GwInput,
 			GwCheckbox,
 			GwMenu,
-			GwGrid
+			GwGrid,
+			GwList
 		},
 		data() {
 			return {

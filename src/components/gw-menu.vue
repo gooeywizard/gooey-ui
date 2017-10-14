@@ -9,7 +9,7 @@
 
 <script>
 	export default {
-		name: 'gw-input',
+		name: 'gw-menu',
 		data () {
 			return {
 				menuOpen: false

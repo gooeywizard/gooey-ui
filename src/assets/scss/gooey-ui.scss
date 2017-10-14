@@ -609,6 +609,8 @@ body {
 	margin-left: 8px;
 }
 
+
+
 /*********************************/
 /*             Box               */
 /*********************************/
@@ -643,6 +645,27 @@ body {
 	border-top: 1px solid #CCC;
 	background-color: inherit;
 }
+
+
+
+/*********************************/
+/*            Lists              */
+/*********************************/
+
+.gw-list {
+	margin: 6px;
+}
+
+.gw-list-item {
+	padding: 5px;
+}
+
+.gw-list-item:hover {
+	background-color: $default-light;
+	cursor: pointer;
+}
+
+
 
 .gw-fill {
 	flex-basis: 100%;

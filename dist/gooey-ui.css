@@ -482,6 +482,19 @@ body {
   border-top: 1px solid #CCC;
   background-color: inherit; }
 
+/*********************************/
+/*            Lists              */
+/*********************************/
+.gw-list {
+  margin: 6px; }
+
+.gw-list-item {
+  padding: 5px; }
+
+.gw-list-item:hover {
+  background-color: #eeeeee;
+  cursor: pointer; }
+
 .gw-fill {
   flex-basis: 100%; }
 
