@@ -193,6 +193,24 @@ blockquote, q {
 .gw-row.gw-right-h {
   justify-content: flex-end; }
 
+.gw-row.gw-left-v {
+  align-items: flex-start; }
+
+.gw-column.gw-left-v {
+  justify-content: flex-start; }
+
+.gw-row.gw-center-v {
+  align-items: center; }
+
+.gw-column.gw-center-v {
+  justify-content: center; }
+
+.gw-row.gw-right-v {
+  align-items: flex-end; }
+
+.gw-column.gw-right-v {
+  justify-content: flex-end; }
+
 /*********************************/
 /*           Modifiers           */
 /*********************************/
