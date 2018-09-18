@@ -1,24 +1,19 @@
 <template>
-  <div class="gw-field" :class="getFieldClasses()">
-		<div class="gw-input">
+	<div class="gw-field" :class="getFieldClasses()" :readonly="readonly">
+
+		<label v-if="label" :class="{ 'gw-field-label': type !== 'checkbox' }" :for="inputId" :style="labelStyle">{{ label }}</label>
+
+		<div class="gw-field-body">
+	
+			<div v-for="(type, i) in fieldTypes" :key="i" class="gw-input">
 			
-			<!-- text -->
-			<input v-if="type === 'text'" type="text" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
+				<input v-if="type === 'text'" :type="type" ref="input" :id="inputId" :value="value" :name="name" v-validate="validate && !readonly ? validate : ''"
+						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
 			
-			<!-- email -->
-			<input v-if="type === 'email'" type="email" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
-			
-			<!-- password -->
-			<input v-if="type === 'password'" type="password" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
-			
-			<!-- date -->
-			<input v-if="type === 'date'" type="date" ref="input" :id="inputId" :name="name" v-validate="validate || ''" v-on:focus="focusHandler()" v-on:blur="blurHandler()" :value="value" @input="updateValue()">
-			
-			<label v-if="label" class="gw-field-label" :class="getLabelClasses()" :for="inputId">{{ label }}</label>
-			
+			</div>
+				
+			<div class="gw-field-feedback" v-if="validate && !readonly && errorMsg && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMsg }}</div>
 		</div>
-		
-		<div class="gw-field-feedback" v-if="errorMsg && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMsg }}</div>
 		
 	</div>
 </template>
@@ -29,10 +24,14 @@
 		data () {
 			return {
 				hasFocus: false,
-				inputId: this._uid + '-input'
+				inputId: this._uid + '-input',
+				fieldTypes: ['text','email','password','date']
 			}
 		},
-		props: ['label','validate','type','name','error-msg','label-position','value'],
+		props: ['label','validate','type','name','error-msg','readonly','value','label-width'],
+		created() {
+			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
+		},
 		methods: {
 			updateValue: function() {
 				this.$emit('input', this.$refs.input.value);
@@ -60,15 +59,6 @@
 				}
 
 				return {};
-			},
-			getLabelClasses: function() {
-				let classes = {};
-				
-				if(this.$props.labelPosition) {
-					classes[this.$props.labelPosition] = true;
-				}
-				
-				return classes;
 			}
 		}
 	}
