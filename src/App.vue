@@ -1,7 +1,7 @@
 <template>
-  <div class="gw-body gw-column sticky-footer">
+  <div class="gw-body gw-column">
 		
-		<header class="gw-header dark shadow text-center">
+		<header class="gw-header dark shadow text-center sticky">
 			<h1>GooeyUI</h1>
 			<h2>A modern UI for modern browsers</h2>
 			<div class="gw-content">(built on VueJS)</div>
@@ -77,7 +77,7 @@
 			</div>
 		</article>
 		
-		<footer class="gw-footer shadow dark"></footer>
+		<footer class="gw-footer shadow dark sticky"></footer>
 		
   </div>
 </template>
