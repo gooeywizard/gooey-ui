@@ -1,0 +1,28 @@
+.gw-btn {
+	padding: 6px;
+	margin: 5px;
+	background-color: white;
+    // border: 1px lightgray solid;
+    border: none;
+	font-size: 14px;
+	outline: none;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .24), 0 1px 1px rgba(0, 0, 0, .12);
+}
+
+.gw-btn[disabled] {
+	color: #CCC;
+}
+
+.gw-btn:not([disabled]):hover, .gw-btn:focus {
+    box-shadow: 0 -1px 0 #e5e5e5,
+		0 0 2px rgba(0, 0, 0, .12),
+        0 2px 4px rgba(0, 0, 0, .24);
+	/* 	background-color: #EEE; */
+	/* padding: 8px;
+	margin: 3px; */
+}
+
+.gw-btn:active {
+	box-shadow: 0 0 1px rgba(0, 0, 0, .24), 0 1px 1px rgba(0, 0, 0, .12);
+}

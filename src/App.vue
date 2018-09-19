@@ -14,7 +14,8 @@
 				</div>
 
 				<div class="gw-box-body">
-					<gw-input type="text" label="Full Name" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
+
+					<gw-input type="text" class="label-top" label="Full Name" v-model="labelTop" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
 					
 					<gw-input type="email" label="Email Address" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
 
@@ -31,6 +32,7 @@
 					<gw-input type="text" name="noLabel" class=""></gw-input>
 					
 					<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
+
 				</div>
 			</div>
 			
@@ -145,7 +147,8 @@
 						three: '333333',
 						four: 'Fourth'
 					}]
-				}
+				},
+				labelTop: ''
 			}
 		}
 	}

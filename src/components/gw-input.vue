@@ -25,6 +25,7 @@
 			return {
 				hasFocus: false,
 				inputId: this._uid + '-input',
+				labelStyle: '',
 				fieldTypes: ['text','email','password','date']
 			}
 		},
@@ -33,7 +34,7 @@
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
 		},
 		methods: {
-			updateValue: function() {
+			updateModel: function() {
 				this.$emit('input', this.$refs.input.value);
 			},
 			focusHandler: function() {
@@ -47,14 +48,14 @@
 
 				if(input) {
 					return {
-						'touched': input.touched,
-						'untouched': input.untouched,
-						'dirty': input.dirty,
-						'pristine': input.pristine,
-						'invalid': input.invalid,
-						'valid': input.valid,
+						'touched': input.touched && !this.$props.readonly,
+						'untouched': input.untouched && !this.$props.readonly,
+						'dirty': input.dirty && !this.$props.readonly,
+						'pristine': input.pristine && !this.$props.readonly,
+						'invalid': input.invalid && !this.$props.readonly,
+						'valid': input.valid && !this.$props.readonly,
 						'has-focus': this.$data.hasFocus,
-						'has-value': this.$refs.input.value.length > 0
+						'has-value': this.$props.value && this.$props.value.length > 0 || this.$props.readonly
 					};
 				}
 

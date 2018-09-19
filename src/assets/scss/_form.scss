@@ -56,7 +56,7 @@ input[readonly] {
 	border: none;
 	border-bottom: 1px solid lightslategray;
 	width: 100%;
-	margin-top: 14px;
+	margin-top: 1px;
 	font-size: 14px;
 	background-color: inherit;
 	color: transparent;
@@ -69,6 +69,11 @@ input[readonly] {
 	border-radius: 3px;
 	margin-top: 0px;
 	padding-top: 3px;
+}
+
+.gw-field.border input,
+.gw-field.border.label-top input {
+	margin-top: 6px;
 }
 
 /** has-focus and has-value handler for input */
@@ -125,16 +130,6 @@ input[readonly] {
 .gw-field.border.label-slide.has-focus label,
 .gw-field.border.label-slide.has-value label {
 	margin-top: -5px;
-}
-
-/** top label */
-.gw-field.label-top input {
-	margin-top: 1px;
-}
-
-/** top label border */
-.gw-field.border.label-top input {
-	margin-top: 6px;
 }
 
 .gw-field.border.label-top label {
