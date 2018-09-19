@@ -1,3 +1,7 @@
+/*********************************/
+/*            Layout             */
+/*********************************/
+
 .gw-row {
 	display: flex;
 	flex-direction: row;
@@ -54,4 +58,71 @@
 
 .gw-column.gw-right-v {
 	justify-content: flex-end;
+}
+
+/*********************************/
+/*    Header, Footer, Article    */
+/*********************************/
+
+.gw-header,
+.gw-footer {
+	padding: 12px;
+}
+
+.gw-header {
+	margin-bottom: 30px;
+}
+
+.gw-footer {
+	margin-top: 30px;
+}
+
+.shadow {
+	box-shadow: 0 -1px 0 #e5e5e5,
+		0 0 2px rgba(0, 0, 0, .12),
+		0 2px 4px rgba(0, 0, 0, .24);
+}
+
+.gw-header.sticky,
+.gw-sidebar.sticky {
+	position: sticky;
+	top: 0px;
+	z-index: 1000;
+}
+
+.gw-header.stuck {
+	position: fixed;
+	width: 100%;
+}
+
+.gw-main-content {
+	max-width: 1000px;
+	width: 100%;
+	align-self: center;
+	background-color: inherit;
+}
+
+.gw-body.sticky-footer .gw-main-content {
+	flex: 1 0 auto;
+}
+
+.gw-wrapper {
+	height: 100%;
+	background-color: inherit;
+}
+
+.gw-body {
+	background-color: inherit;
+}
+
+.gw-footer.sticky {
+	position: sticky;
+	bottom: 10px;
+}
+
+.gw-body.sticky-footer {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+	min-height: 100%;
 }

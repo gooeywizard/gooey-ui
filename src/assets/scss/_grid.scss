@@ -1,0 +1,146 @@
+.gw-grid {
+    /*   border-width: 1px 0 0 1px; */
+}
+
+.gw-grid .gw-grid-cell {
+/*   border-width: 0 1px 1px 0; */
+    width: 150px;
+    padding: 12px 8px 12px 8px;
+    background-color: white;
+    color: black;
+}
+
+.gw-grid .gw-grid-row.highlight:hover .gw-grid-cell {
+    background-color: $default-light;
+}
+
+/* .gw-grid,
+.gw-grid-cell {
+    border-color: gray;
+    border-style: solid;
+} */
+
+
+
+.gw-grid-header .gw-grid-cell:before {
+    font-size: 13px;
+}
+
+.gw-grid-header .gw-grid-cell.gw-sort-desc:before {
+    content: '\25BC';
+}
+
+.gw-grid-header .gw-grid-cell.gw-sort-asc:before {
+    content: '\25B2';
+}
+
+.gw-btn[disabled] {
+    background-color: #EEE;
+}
+
+.gw-grid .gw-grid-header .gw-grid-cell {
+    background-color: $default;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+}
+
+.gw-grid,
+.gw-grid .gw-grid-cell {
+    border-color: $default;
+}
+
+.light,
+.gw-btn.light,
+.gw-grid.light .gw-grid-header .gw-grid-cell {
+    background-color: $light;
+    color: $light-font;
+}
+
+.gw-grid.light,
+.gw-grid.light .gw-grid-cell {
+}
+
+.dark,
+.gw-btn.dark,
+.gw-grid.dark .gw-grid-header .gw-grid-cell {
+    background-color: $dark;
+    color: $dark-font;
+}
+
+.gw-grid.dark,
+.gw-grid.dark .gw-grid-cell {
+    border-color: $dark;
+}
+
+.gw-grid.dark .gw-grid-row:not(.gw-grid-header):hover .gw-grid-cell {
+    background-color: $dark-light;
+}
+
+.primary,
+.gw-btn.primary,
+.gw-grid.primary .gw-grid-header .gw-grid-cell {
+    background-color: $primary;
+    color: $primary-font;
+}
+
+.gw-grid.primary,
+.gw-grid.primary .gw-grid-cell {
+    border-color: $primary;
+}
+
+.gw-grid.primary .gw-grid-row:not(.gw-grid-header):hover .gw-grid-cell {
+    background-color: $primary-light;
+}
+
+.secondary,
+.gw-btn.secondary,
+.gw-grid.secondary .gw-grid-header .gw-grid-cell {
+    background-color: $secondary;
+    color: $secondary-font;
+}
+
+.gw-grid.secondary,
+.gw-grid.secondary .gw-grid-cell {
+    border-color: $secondary;
+}
+
+.gw-grid.secondary .gw-grid-row:not(.gw-grid-header):hover .gw-grid-cell {
+    background-color: $secondary-light;
+}
+
+.success,
+.gw-btn.success,
+.gw-grid.success .gw-grid-header .gw-grid-cell {
+    background-color: $success;
+    color: $success-font;
+}
+
+.gw-grid.success,
+.gw-grid.success .gw-grid-cell {
+    border-color: $success;
+}
+
+.warn,
+.gw-btn.warn,
+.gw-grid.warn .gw-grid-header .gw-grid-cell {
+    background-color: $warn;
+    color: $warn-font;
+}
+
+.gw-grid.warn,
+.gw-grid.warn .gw-grid-cell {
+    border-color: $warn;
+}
+
+.error,
+.gw-btn.error,
+.gw-grid.error .gw-grid-header .gw-grid-cell {
+    background-color: $error;
+    color: $error-font;
+}
+
+.gw-grid.error,
+.gw-grid.error .gw-grid-cell {
+    border-color: $error;
+}
