@@ -5,9 +5,9 @@
 
 		<div class="gw-field-body">
 	
-			<div v-for="(type, i) in fieldTypes" :key="i" class="gw-input">
+			<div class="gw-input">
 			
-				<input v-if="type === 'text'" :type="type" ref="input" :id="inputId" :value="value" :name="name" v-validate="validate && !readonly ? validate : ''"
+				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" v-validate="validate && !readonly ? validate : ''"
 						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
 			
 			</div>

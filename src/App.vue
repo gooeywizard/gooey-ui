@@ -15,21 +15,22 @@
 
 				<div class="gw-box-body">
 
-					<gw-input type="text" class="label-top" label="Full Name" v-model="labelTop" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
+					<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
+					<div>Full Name: {{ fullName }}</div>
 					
-					<gw-input type="email" label="Email Address" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
+					<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
 
-					<gw-input type="password" label="Password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
+					<gw-input type="password" label="Password" v-model="password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
 
-					<gw-input type="date" label="Date" name="date"></gw-input>
+					<gw-input type="date" label="Date" v-model="date" name="date"></gw-input>
 					
-					<gw-input type="text" class="border" label="Full Border Example" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
+					<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
 					
-					<gw-input type="text" label="No Validation" name="noValidation"></gw-input>
+					<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation"></gw-input>
 					
-					<gw-input type="text" label="No Validation Border" name="noValidationBorder" class="border"></gw-input>
+					<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border"></gw-input>
 					
-					<gw-input type="text" name="noLabel" class=""></gw-input>
+					<gw-input type="text" v-model="noLabel" name="noLabel"></gw-input>
 					
 					<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
 
@@ -148,7 +149,14 @@
 						four: 'Fourth'
 					}]
 				},
-				labelTop: ''
+				fullName: '',
+				email: '',
+				password: '',
+				date: '',
+				fullBorder: '',
+				noValidation: '',
+				noValidationBorder: '',
+				noLabel: ''
 			}
 		}
 	}
