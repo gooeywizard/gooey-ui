@@ -7,7 +7,7 @@
 	
 			<div class="gw-input">
 			
-				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" v-validate="validate && !readonly ? validate : ''"
+				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
 						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
 			
 			</div>
@@ -38,7 +38,9 @@
 				this.$emit('input', this.$refs.input.value);
 			},
 			focusHandler: function() {
-				this.$data.hasFocus = true;
+				if(!this.$props.readonly) {
+					this.$data.hasFocus = true;
+				}
 			},
 			blurHandler: function() {
 				this.$data.hasFocus = false;

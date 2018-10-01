@@ -8,31 +8,57 @@
 		</header>
 		
 		<article class="gw-main-content gw-column gw-center-h">
+			
 			<div class="gw-box shadow">
 				<div class="gw-box-header">
 					<h4>Forms and Fields</h4>
 				</div>
+				
+				<div class="gw-box-body gw-row">
+					
+					<div class="gw-column col-50">
+						<h5 class="gw-box-header">Editable</h5>
+						
+						<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
+						
+						<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
 
-				<div class="gw-box-body">
+						<gw-input type="password" label="Password" v-model="password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
 
-					<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
-					<div>Full Name: {{ fullName }}</div>
+						<gw-input type="date" label="Date" v-model="date" name="date"></gw-input>
+						
+						<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
+						
+						<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation"></gw-input>
+						
+						<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border"></gw-input>
+						
+						<gw-input type="text" v-model="noLabel" name="noLabel"></gw-input>
+						
+						<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
+					</div>
 					
-					<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
+					<div class="gw-column col-50">
+						<h5 class="gw-box-header">Readonly</h5>
+						
+						<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" readonly="true" error-msg="Please enter your name."></gw-input>
+						
+						<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" readonly error-msg="Please enter your email address in the format: email@email.com"></gw-input>
 
-					<gw-input type="password" label="Password" v-model="password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
+						<gw-input type="password" label="Password" v-model="password" validate="required" name="password" readonly error-msg="Please enter a password."></gw-input>
 
-					<gw-input type="date" label="Date" v-model="date" name="date"></gw-input>
-					
-					<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
-					
-					<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation"></gw-input>
-					
-					<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border"></gw-input>
-					
-					<gw-input type="text" v-model="noLabel" name="noLabel"></gw-input>
-					
-					<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
+						<gw-input type="date" label="Date" v-model="date" name="date" readonly></gw-input>
+						
+						<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" readonly="true" error-msg="You messed up!"></gw-input>
+						
+						<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation" readonly="true"></gw-input>
+						
+						<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border" readonly="true"></gw-input>
+						
+						<gw-input type="text" v-model="noLabel" name="noLabel" readonly="true"></gw-input>
+						
+						<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms" readonly="true"></gw-checkbox>
+					</div>
 
 				</div>
 			</div>
