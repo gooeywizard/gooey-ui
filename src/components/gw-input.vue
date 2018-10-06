@@ -12,7 +12,7 @@
 			
 			</div>
 				
-			<div class="gw-field-feedback" v-if="validate && !readonly && errorMsg && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMsg }}</div>
+			<div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMessage }}</div>
 		</div>
 		
 	</div>
@@ -33,6 +33,27 @@
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
 		},
+		
+		computed: {
+			errorMessage() {
+				if(this.$props.errorMsg) {
+					return this.$props.errorMsg;
+				}
+				
+				if(this.$props.validate) {
+					// default if field is required
+					if(this.$props.validate.indexOf('required') >= 0) {
+						return 'This field is required.';
+					}
+					
+					// default
+					return 'Invalid input.';
+				}
+				
+				return '';
+			}
+		},
+		
 		methods: {
 			updateModel: function() {
 				this.$emit('input', this.$refs.input.value);
