@@ -1,5 +1,5 @@
 <template>
-  <div class="gw-body gw-column">
+  <div class="gw-body gw-column" :class="{'noscroll': displayDialog}">
 		
 		<header class="gw-header dark shadow text-center sticky">
 			<h1>GooeyUI</h1>
@@ -102,6 +102,27 @@
 					<gw-grid :config="gridConfig"></gw-grid>
 				</div>
 			</div>
+			
+			<div class="gw-box shadow">
+				<div class="gw-box-header">
+					<h4>Modal</h4>
+				</div>
+				<div class="gw-box-body">
+					<button type="button" class="gw-btn primary" @click="toggleModal">Show Modal Dialog</button>
+					<gui-dialog v-if="displayDialog">
+						<div slot="header">
+							<h4>Modal Header</h4>
+						</div>
+						<div slot="body">
+							<div style="height: 800px;">Fill this space</div>
+						</div>
+						<div slot="footer">
+							Modal Footer
+						</div>
+					</gui-dialog>
+				</div>
+			</div>
+			
 		</article>
 		
 		<footer class="gw-footer shadow dark sticky"></footer>
@@ -115,6 +136,7 @@
 	import GwMenu from './components/gw-menu.vue'
 	import GwGrid from './components/gw-grid.vue'
 	import GwList from './components/gw-list.vue'
+	import GuiDialog from './components/gui-dialog.vue'
 	
 	export default {
 		name: 'app',
@@ -123,10 +145,12 @@
 			GwCheckbox,
 			GwMenu,
 			GwGrid,
-			GwList
+			GwList,
+			GuiDialog
 		},
 		data() {
 			return {
+				displayDialog: false,
 				gridConfig: {
 					highlightRows: true,
 					highlightColumns: true,
@@ -184,10 +208,20 @@
 				noValidationBorder: '',
 				noLabel: ''
 			}
+		},
+		
+		methods: {
+			toggleModal: function() {
+				this.$data.displayDialog = !this.$data.displayDialog;
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	@import '../src/assets/scss/gooey-ui.scss'
+	@import '../src/assets/scss/gooey-ui.scss';
+	
+	.noscroll {
+		overflow: hidden;
+	}
 </style>

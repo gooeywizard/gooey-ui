@@ -1,0 +1,11 @@
+.gw-dialog-mask {
+	background-color: #000;
+	opacity: 0.5;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	overflow-y: scroll;
+	z-index: 1010;
+}
