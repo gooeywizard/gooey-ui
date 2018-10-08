@@ -6,7 +6,7 @@
 
 <script>
 	export default {
-		name: 'gw-list',
+		name: 'gui-list',
 		data () {
 			return {
 			}

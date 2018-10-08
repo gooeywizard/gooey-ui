@@ -19,45 +19,45 @@
 					<div class="gw-column col-50">
 						<h5 class="gw-box-header">Editable</h5>
 						
-						<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gw-input>
+						<gui-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gui-input>
 						
-						<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gw-input>
+						<gui-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gui-input>
 
-						<gw-input type="password" label="Password" v-model="password" validate="required" name="password" error-msg="Please enter a password."></gw-input>
+						<gui-input type="password" label="Password" v-model="password" validate="required" name="password" error-msg="Please enter a password."></gui-input>
 
-						<gw-input type="date" label="Date" v-model="date" name="date"></gw-input>
+						<gui-input type="date" label="Date" v-model="date" name="date"></gui-input>
 						
-						<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" error-msg="You messed up!"></gw-input>
+						<gui-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" error-msg="You messed up!"></gui-input>
 						
-						<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation"></gw-input>
+						<gui-input type="text" label="No Validation" v-model="noValidation" name="noValidation"></gui-input>
 						
-						<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border"></gw-input>
+						<gui-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border"></gui-input>
 						
-						<gw-input type="text" v-model="noLabel" name="noLabel"></gw-input>
+						<gui-input type="text" v-model="noLabel" name="noLabel"></gui-input>
 						
-						<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gw-checkbox>
+						<gui-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms"></gui-checkbox>
 					</div>
 					
 					<div class="gw-column col-50">
 						<h5 class="gw-box-header">Readonly</h5>
 						
-						<gw-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" readonly="true" error-msg="Please enter your name."></gw-input>
+						<gui-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" readonly="true" error-msg="Please enter your name."></gui-input>
 						
-						<gw-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" readonly error-msg="Please enter your email address in the format: email@email.com"></gw-input>
+						<gui-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" readonly error-msg="Please enter your email address in the format: email@email.com"></gui-input>
 
-						<gw-input type="password" label="Password" v-model="password" validate="required" name="password" readonly error-msg="Please enter a password."></gw-input>
+						<gui-input type="password" label="Password" v-model="password" validate="required" name="password" readonly error-msg="Please enter a password."></gui-input>
 
-						<gw-input type="date" label="Date" v-model="date" name="date" readonly></gw-input>
+						<gui-input type="date" label="Date" v-model="date" name="date" readonly></gui-input>
 						
-						<gw-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" readonly="true" error-msg="You messed up!"></gw-input>
+						<gui-input type="text" class="border" label="Full Border Example" v-model="fullBorder" validate="required" name="borderExample" readonly="true" error-msg="You messed up!"></gui-input>
 						
-						<gw-input type="text" label="No Validation" v-model="noValidation" name="noValidation" readonly="true"></gw-input>
+						<gui-input type="text" label="No Validation" v-model="noValidation" name="noValidation" readonly="true"></gui-input>
 						
-						<gw-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border" readonly="true"></gw-input>
+						<gui-input type="text" label="No Validation Border" v-model="noValidationBorder" name="noValidationBorder" class="border" readonly="true"></gui-input>
 						
-						<gw-input type="text" v-model="noLabel" name="noLabel" readonly="true"></gw-input>
+						<gui-input type="text" v-model="noLabel" name="noLabel" readonly="true"></gui-input>
 						
-						<gw-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms" readonly="true"></gw-checkbox>
+						<gui-checkbox label="I agree to the <a href='' v-on:click='showTerms()'>Terms of Service</a>." name="terms" readonly="true"></gui-checkbox>
 					</div>
 
 				</div>
@@ -74,11 +74,11 @@
 					<button type="button" class="gw-btn error">Error</button>
 				</div>
 				<div class="gw-box-body">
-					<gw-menu>
+					<gui-menu>
 						<li class="gw-menu-item">Item #1</li>
 						<li class="gw-menu-item">Item #2</li>
 						<li class="gw-menu-item">Item #3</li>
-					</gw-menu>
+					</gui-menu>
 				</div>
 			</div>
 			
@@ -87,10 +87,10 @@
 					<h4>Lists</h4>
 				</div>
 				<div class="gw-box-body">
-					<gw-list>
+					<gui-list>
 						<li class="gw-list-item">Result 1</li>
 						<li class="gw-list-item">Result 2</li>
-					</gw-list>
+					</gui-list>
 				</div>
 			</div>
 			
@@ -99,7 +99,7 @@
 					<h4>Grids</h4>
 				</div>
 				<div class="gw-box-body">
-					<gw-grid :config="gridConfig"></gw-grid>
+					<gui-grid :config="gridConfig"></gui-grid>
 				</div>
 			</div>
 			
@@ -131,21 +131,21 @@
 </template>
 
 <script>
-	import GwInput from './components/gw-input.vue'
-	import GwCheckbox from './components/gw-checkbox.vue'
-	import GwMenu from './components/gw-menu.vue'
-	import GwGrid from './components/gw-grid.vue'
-	import GwList from './components/gw-list.vue'
+	import GuiInput from './components/gui-input.vue'
+	import GuiCheckbox from './components/gui-checkbox.vue'
+	import GuiMenu from './components/gui-menu.vue'
+	import GuiGrid from './components/gui-grid.vue'
+	import GuiList from './components/gui-list.vue'
 	import GuiDialog from './components/gui-dialog.vue'
 	
 	export default {
 		name: 'app',
 		components: {
-			GwInput,
-			GwCheckbox,
-			GwMenu,
-			GwGrid,
-			GwList,
+			GuiInput,
+			GuiCheckbox,
+			GuiMenu,
+			GuiGrid,
+			GuiList,
 			GuiDialog
 		},
 		data() {

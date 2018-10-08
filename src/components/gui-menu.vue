@@ -9,7 +9,7 @@
 
 <script>
 	export default {
-		name: 'gw-menu',
+		name: 'gui-menu',
 		data () {
 			return {
 				menuOpen: false
@@ -60,7 +60,7 @@
 	}
 	
 	.gw-menu li {
-		decoration: none;
+		text-decoration: none;
 		border-bottom: 1px solid lightslategray;
 		padding: 6px;
 		cursor: pointer;

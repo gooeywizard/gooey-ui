@@ -20,7 +20,7 @@
 
 <script>
 	export default {
-		name: 'gw-input',
+		name: 'gui-input',
 		data () {
 			return {
 				hasFocus: false,

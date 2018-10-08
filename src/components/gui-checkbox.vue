@@ -12,7 +12,7 @@
 
 <script>
 	export default {
-		name: 'gw-input',
+		name: 'gui-checkbox',
 		data () {
 			return {
 				value: false,

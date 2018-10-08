@@ -1,20 +1,24 @@
-import GwInput from './components/gw-input.vue'
-import GwCheckbox from './components/gw-checkbox.vue'
-import GwMenu from './components/gw-menu.vue'
-import GwGrid from './components/gw-grid.vue'
+import GuiInput from './components/gui-input.vue'
+import GuiCheckbox from './components/gui-checkbox.vue'
+import GuiMenu from './components/gui-menu.vue'
+import GuiGrid from './components/gui-grid.vue'
+import GuiDialog from './components/gui-dialog.vue'
+
 
 require("./assets/scss/gooey-ui.scss");
 
 export {
-	GwInput,
-	GwCheckbox,
-	GwMenu,
-	GwGrid
+	GuiInput,
+	GuiCheckbox,
+	GuiMenu,
+	GuiGrid,
+	GuiDialog
 }
 
 export default {
-	GwInput: GwInput,
-	GwCheckbox: GwCheckbox,
-	GwMenu: GwMenu,
-	GwGrid: GwGrid
+	GuiInput: GuiInput,
+	GuiCheckbox: GuiCheckbox,
+	GuiMenu: GuiMenu,
+	GuiGrid: GuiGrid,
+	GuiDialog: GuiDialog
 }

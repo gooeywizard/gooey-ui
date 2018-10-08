@@ -22,7 +22,7 @@
 <script>
 
 export default {
-	name: 'GuiDialog',
+	name: 'gui-dialog',
 	
 	mounted() {
 		let body = document.getElementsByTagName('body')[0];
