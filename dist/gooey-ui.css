@@ -58,40 +58,40 @@ blockquote, q {
   display: flex;
   flex-direction: column; }
 
-.gw-column.gw-left-h {
+.gw-column.left {
   align-items: flex-start; }
 
-.gw-row.gw-left-h {
+.gw-row.left {
   justify-content: flex-start; }
 
-.gw-column.gw-center-h {
+.gw-column.center-h {
   align-items: center; }
 
-.gw-row.gw-center-h {
+.gw-row.center-h {
   justify-content: center; }
 
-.gw-column.gw-right-h {
+.gw-column.right {
   align-items: flex-end; }
 
-.gw-row.gw-right-h {
+.gw-row.right {
   justify-content: flex-end; }
 
-.gw-row.gw-left-v {
+.gw-row.top {
   align-items: flex-start; }
 
-.gw-column.gw-left-v {
+.gw-column.top {
   justify-content: flex-start; }
 
-.gw-row.gw-center-v {
+.gw-row.center-v {
   align-items: center; }
 
-.gw-column.gw-center-v {
+.gw-column.center-v {
   justify-content: center; }
 
-.gw-row.gw-right-v {
+.gw-row.bottom {
   align-items: flex-end; }
 
-.gw-column.gw-right-v {
+.gw-column.bottom {
   justify-content: flex-end; }
 
 .gw-column.col-50 {
@@ -102,7 +102,9 @@ blockquote, q {
 /*********************************/
 .gw-header,
 .gw-footer {
-  padding: 12px; }
+  padding: 12px;
+  display: flex;
+  flex-direction: horizontal; }
 
 .gw-header {
   margin-bottom: 30px; }
@@ -491,6 +493,27 @@ input[readonly] {
 .gw-btn:active {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.24), 0 1px 1px rgba(0, 0, 0, 0.12); }
 
+.gw-dialog-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1100;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* height: 100%;
+	width: 100%; */ }
+
+.gw-dialog,
+.gw-dialog.gw-box,
+.gw-dialog.gw-box.shadow {
+  position: relative;
+  margin: 50px auto;
+  min-width: 800px;
+  max-width: 1200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
+
 .gw-dialog-mask {
   background-color: #000;
   opacity: 0.5;
@@ -528,7 +551,14 @@ h5 {
   font-size: 20px; }
 
 h3, h4, h5 {
-  margin: 8px; }
+  margin: 8px 0px; }
+
+p {
+  line-height: 1.3;
+  margin-bottom: 12px; }
+
+p:last-of-type {
+  margin-bottom: initial; }
 
 .gw-content {
   font-size: 16px;
