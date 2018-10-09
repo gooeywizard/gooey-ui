@@ -1,12 +1,12 @@
 <template>
   <table class="gw-grid">
     <tr class="gw-row gw-grid-row gw-grid-header">
-      <th class="gw-grid-cell" :class="{ 'gw-sort-desc': column.sortDir === 'desc', 'gw-sort-asc': column.sortDir === 'asc' }" v-for="{column,i} in orderedColumns" :key="i" @dblclick="sort(column, $event)">
+      <th class="gw-grid-cell" :class="{ 'gw-sort-desc': column.sortDir === 'desc', 'gw-sort-asc': column.sortDir === 'asc' }" v-for="column in orderedColumns" @dblclick="sort(column, $event)">
         {{ column.header }}
       </th>
     </tr>
-    <tr class="gw-row gw-grid-row" :class="{ highlight: config.highlightRows }" v-for="{record,i} in sortedData" :key="i">
-      <td class="gw-grid-cell" v-for="{column,i} in orderedColumns" :key="i">
+    <tr class="gw-row gw-grid-row" :class="{ highlight: config.highlightRows }" v-for="record in sortedData">
+      <td class="gw-grid-cell" v-for="column in orderedColumns">
         {{ record[column.field] }}
       </td>
     </tr>
@@ -18,7 +18,7 @@
 	const DESC = 'desc';
 	
 	export default {
-		name: 'gui-grid',
+		name: 'gw-input',
 		data () {
 			return {
 				sortedData: [],

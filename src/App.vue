@@ -1,13 +1,13 @@
 <template>
   <div class="gw-body gw-column" :class="{'noscroll': displayDialog}">
 		
-		<header class="gw-header dark shadow text-center sticky">
+		<header class="gw-header gw-column dark shadow center-h sticky">
 			<h1>GooeyUI</h1>
 			<h2>A modern UI for modern browsers</h2>
 			<div class="gw-content">(built on VueJS)</div>
 		</header>
 		
-		<article class="gw-main-content gw-column gw-center-h">
+		<article class="gw-main-content gw-column center-h">
 			
 			<div class="gw-box shadow">
 				<div class="gw-box-header">

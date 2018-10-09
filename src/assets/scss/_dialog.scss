@@ -1,3 +1,26 @@
+.gw-dialog-wrapper {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	z-index: 1100;
+	overflow-x: hidden;
+	overflow-y: auto;
+	/* height: 100%;
+	width: 100%; */
+}
+
+.gw-dialog,
+.gw-dialog.gw-box,
+.gw-dialog.gw-box.shadow {
+	position: relative;
+	margin: 50px auto;
+	min-width: 800px;
+	max-width: 1200px;
+	box-shadow: 0 5px 15px rgba(0,0,0,.5);
+}
+
 .gw-dialog-mask {
 	background-color: #000;
 	opacity: 0.5;

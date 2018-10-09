@@ -1,6 +1,6 @@
 <template>
 	<div class="gw-dialog-wrapper" @click="onClickAway">
-		<div class="gw-column gw-center-h">
+		<div class="gw-column center-h">
 			<div class="gw-box shadow gw-dialog">
 				<div class="gw-box-header">
 					<slot name="header"></slot>
@@ -63,37 +63,5 @@ export default {
 </script>
 
 <style scoped>
-.gw-dialog-wrapper {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	z-index: 1100;
-	overflow-x: hidden;
-	overflow-y: auto;
-	/* height: 100%;
-	width: 100%; */
-}
-
-.gw-dialog {
-	position: relative;
-	margin: 100px auto;
-	min-width: 800px;
-	max-width: 1200px;
-	box-shadow: 0 5px 15px rgba(0,0,0,.5);
-}
-
-.gw-dialog-mask {
-	background-color: #000;
-	opacity: 0.5;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	overflow-y: scroll;
-	z-index: 1010;
-}
 
 </style>
