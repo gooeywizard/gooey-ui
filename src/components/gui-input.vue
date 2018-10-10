@@ -10,9 +10,9 @@
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
 						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
 				
-				<ul class="gw-list shadow" v-if="menu">
-					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(item)">
-						{{ item.value }}
+				<ul class="gw-list shadow" v-if="options">
+					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)">
+						{{ item }}
 					</li>
 				</ul>
 			
@@ -34,11 +34,11 @@
 				inputId: this._uid + '-input',
 				labelStyle: '',
 				fieldTypes: ['text','email','password','date'],
-				options: [{ value:'one'}, {value:'two'}, {value:'three'}]
+				highlighted: -1
 			}
 		},
 
-		props: ['label','validate','type','name','error-msg','readonly','value','label-width','menu'],
+		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options'],
 
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
@@ -69,10 +69,8 @@
 				let value = this.$refs.input.value;
 				this.$emit('input', value);
 
-				let items = this.$data.options || [];
-				if(items.length > 0) {
-					this.updateHighlighted(value, items);
-				}
+				let items = this.$props.options || [];
+				this.updateHighlighted(value, items);
 			},
 			focusHandler: function() {
 				if(!this.$props.readonly) {
@@ -101,27 +99,26 @@
 				return {};
 			},
 
-			getHighlightedClass: function(item) {
-				return { 'highlight': item.highlighted };
+			getHighlightedClass: function(i) {
+				console.debug('highlighted: ' + this.$data.highlighted, i);
+				return { 'highlight': i === this.$data.highlighted };
 			},
 
 			updateHighlighted: function(value, items) {
+				if(!value) {
+					this.$data.highlighted = -1;
+					return;
+				}
+
 				if(items.length > 0) {
-					let found = false;
+					this.$data.highlighted = -1;
 
 					for(let i = 0; i < items.length; i++) {
 						let item = items[i];
-
-						if(!found && item.value.indexOf(value) >= 0) {
-							item.highlighted = true;
-							found = true;
-						} else {
-							item.highlighted = false;
+						if(item.indexOf(value) >= 0) {
+							this.$data.highlighted = i;
+							return;
 						}
-					}
-
-					if(!found) {
-						items[0].highlighted = true;
 					}
 				}
 			}

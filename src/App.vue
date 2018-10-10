@@ -18,8 +18,10 @@
 					
 					<div class="gw-column col-50">
 						<h5 class="gw-box-header">Editable</h5>
+
+						<gui-input type="text" label="Dropdown" v-model="dropdown" :options="dropdownOptions" name="dropdown"></gui-input>
 						
-						<gui-input type="text" label="Full Name" menu="true" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gui-input>
+						<gui-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" error-msg="Please enter your name."></gui-input>
 						
 						<gui-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" error-msg="Please enter your email address in the format: email@email.com"></gui-input>
 
@@ -206,7 +208,9 @@
 				fullBorder: '',
 				noValidation: '',
 				noValidationBorder: '',
-				noLabel: ''
+				noLabel: '',
+				dropdown: '',
+				dropdownOptions: ['one','two','three','four']
 			}
 		},
 		
