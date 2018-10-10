@@ -8,7 +8,7 @@
 			<div class="gw-input">
 			
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
-						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
+						@focus="focusHandler" @blur="blurHandler" @input="updateModel" @keydown="onKeyDown">
 				
 				<ul class="gw-list shadow" v-if="options">
 					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)">
@@ -65,7 +65,8 @@
 		},
 		
 		methods: {
-			updateModel: function() {
+			updateModel: function(event) {
+				console.log(event);
 				let value = this.$refs.input.value;
 				this.$emit('input', value);
 
@@ -100,7 +101,6 @@
 			},
 
 			getHighlightedClass: function(i) {
-				console.debug('highlighted: ' + this.$data.highlighted, i);
 				return { 'highlight': i === this.$data.highlighted };
 			},
 
@@ -121,6 +121,34 @@
 						}
 					}
 				}
+			},
+
+			onKeyDown: function(event) {
+				if(event.keyCode === 40) {
+					event.preventDefault();
+					this.onDownArrow();
+				} else if(event.keyCode === 38) {
+					event.preventDefault();
+					this.onUpArrow();
+				}
+			},
+
+			onDownArrow: function() {
+				if(!this.$props.options) {
+					return;
+				}
+
+				this.$data.highlighted++;
+				this.$data.highlighted = Math.min(this.$data.highlighted, this.$props.options.length - 1);
+			},
+
+			onUpArrow: function() {
+				if(!this.$props.options) {
+					return;
+				}
+
+				this.$data.highlighted--;
+				this.$data.highlighted = Math.max(this.$data.highlighted, 0);
 			}
 		}
 	}
