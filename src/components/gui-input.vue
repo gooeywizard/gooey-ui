@@ -8,10 +8,10 @@
 			<div class="gw-input">
 			
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
-						@focus="focusHandler" @blur="blurHandler" @input="updateModel" @keydown="onKeyDown">
+						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown">
 				
-				<ul class="gw-list shadow" v-if="options">
-					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)">
+				<ul class="gw-list shadow" v-if="displayDropdown">
+					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)" @click="onClickOption(item)">
 						{{ item }}
 					</li>
 				</ul>
@@ -34,7 +34,8 @@
 				inputId: this._uid + '-input',
 				labelStyle: '',
 				fieldTypes: ['text','email','password','date'],
-				highlighted: -1
+				highlighted: -1,
+				displayDropdown: false
 			}
 		},
 
@@ -65,21 +66,33 @@
 		},
 		
 		methods: {
-			updateModel: function(event) {
-				console.log(event);
-				let value = this.$refs.input.value;
-				this.$emit('input', value);
+			onInput: function(event) {
+				this.updateModel();
 
-				let items = this.$props.options || [];
-				this.updateHighlighted(value, items);
+				if(this.$props.options && this.$props.options.length > 0) {
+					let items = this.$props.options || [];
+					this.updateHighlighted(this.$refs.input.value, items);
+					this.$data.displayDropdown = true;
+				}
 			},
+			
+			updateModel: function(value) {
+				if(value === null || value === undefined) {
+					value = this.$refs.input.value;
+				}
+				this.$emit('input', value);
+			},
+			
 			focusHandler: function() {
 				if(!this.$props.readonly) {
 					this.$data.hasFocus = true;
 				}
 			},
+			
 			blurHandler: function() {
 				this.$data.hasFocus = false;
+				// this.$data.displayDropdown = false;
+				// this.$data.highlighted = -1;
 			},
 			getFieldClasses: function() {
 				let input = this.fields[this.$props.name];
@@ -124,12 +137,25 @@
 			},
 
 			onKeyDown: function(event) {
-				if(event.keyCode === 40) {
+				if(event.key === 'ArrowDown') {
 					event.preventDefault();
 					this.onDownArrow();
-				} else if(event.keyCode === 38) {
+				} else if(event.key === 'ArrowUp') {
 					event.preventDefault();
 					this.onUpArrow();
+				} else if(event.key === 'Enter') {
+					event.preventDefault();
+					if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
+						this.updateModel(this.$props.options[this.$data.highlighted]);
+						this.$data.displayDropdown = false;
+						this.$data.highlighted = -1;
+					}
+				} else if(event.key === 'Tab') {
+					if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
+						this.updateModel(this.$props.options[this.$data.highlighted]);
+						this.$data.displayDropdown = false;
+						this.$data.highlighted = -1;
+					}
 				}
 			},
 
@@ -149,6 +175,13 @@
 
 				this.$data.highlighted--;
 				this.$data.highlighted = Math.max(this.$data.highlighted, 0);
+			},
+			
+			onClickOption: function(option) {
+				console.log('click', option);
+				this.updateModel(option);
+				this.$data.displayDropdown = false;
+				this.$data.highlighted = -1;
 			}
 		}
 	}
