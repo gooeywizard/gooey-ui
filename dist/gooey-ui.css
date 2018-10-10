@@ -610,7 +610,8 @@ body {
 .gw-list-item {
   padding: 5px; }
 
-.gw-list-item:hover {
+.gw-list-item:hover,
+.gw-list-item.highlight {
   background-color: #eeeeee;
   cursor: pointer; }
 
