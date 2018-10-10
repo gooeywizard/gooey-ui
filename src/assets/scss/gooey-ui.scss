@@ -122,7 +122,8 @@ body {
 	padding: 5px;
 }
 
-.gw-list-item:hover {
+.gw-list-item:hover,
+.gw-list-item.highlight {
 	background-color: $default-light;
 	cursor: pointer;
 }

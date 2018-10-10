@@ -9,6 +9,12 @@
 			
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
 						@focus="focusHandler" @blur="blurHandler"  @input="updateModel">
+				
+				<ul class="gw-list shadow" v-if="menu">
+					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(item)">
+						{{ item.value }}
+					</li>
+				</ul>
 			
 			</div>
 				
@@ -21,15 +27,19 @@
 <script>
 	export default {
 		name: 'gui-input',
+
 		data () {
 			return {
 				hasFocus: false,
 				inputId: this._uid + '-input',
 				labelStyle: '',
-				fieldTypes: ['text','email','password','date']
+				fieldTypes: ['text','email','password','date'],
+				options: [{ value:'one'}, {value:'two'}, {value:'three'}]
 			}
 		},
-		props: ['label','validate','type','name','error-msg','readonly','value','label-width'],
+
+		props: ['label','validate','type','name','error-msg','readonly','value','label-width','menu'],
+
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
 		},
@@ -56,7 +66,13 @@
 		
 		methods: {
 			updateModel: function() {
-				this.$emit('input', this.$refs.input.value);
+				let value = this.$refs.input.value;
+				this.$emit('input', value);
+
+				let items = this.$data.options || [];
+				if(items.length > 0) {
+					this.updateHighlighted(value, items);
+				}
 			},
 			focusHandler: function() {
 				if(!this.$props.readonly) {
@@ -83,30 +99,47 @@
 				}
 
 				return {};
+			},
+
+			getHighlightedClass: function(item) {
+				return { 'highlight': item.highlighted };
+			},
+
+			updateHighlighted: function(value, items) {
+				if(items.length > 0) {
+					let found = false;
+
+					for(let i = 0; i < items.length; i++) {
+						let item = items[i];
+
+						if(!found && item.value.indexOf(value) >= 0) {
+							item.highlighted = true;
+							found = true;
+						} else {
+							item.highlighted = false;
+						}
+					}
+
+					if(!found) {
+						items[0].highlighted = true;
+					}
+				}
 			}
 		}
 	}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/*
-h1, h2 {
-  font-weight: normal;
+.gw-list {
+	position: absolute;
+	margin-top: 30px;
+	z-index: 1000;
+	background-color: #FFF;
+	min-width: 100px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+.gw-list-item {
 
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
-
-a {
-  color: #42b983;
-}
-*/
 </style>
