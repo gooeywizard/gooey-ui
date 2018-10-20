@@ -8,7 +8,7 @@
 			<div class="gw-input">
 			
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
-						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown">
+						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown" @keyup="onKeyUp">
 				
 				<ul class="gw-list shadow" v-if="displayDropdown">
 					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)" @click="onClickOption(item)">
@@ -70,6 +70,14 @@
 				}
 				
 				return '';
+			},
+			
+			hasMask() {
+				return this.$props.mask && this.$props.mask.length > 0;
+			},
+			
+			hasDropdown() {
+				return this.$props.options && this.$props.options.length > 0;
 			}
 		},
 		
@@ -168,7 +176,7 @@
 			},
 
 			onKeyDown: function(event) {
-				if(this.$props.options && this.$data.displayDropdown) {
+				if(this.hasDropdown && this.$data.displayDropdown) {
 					if(event.key === 'ArrowDown') {
 						event.preventDefault();
 						this.onDownArrow();
@@ -189,31 +197,16 @@
 							this.$data.highlighted = -1;
 						}
 					}
-				} else if(this.$props.mask && this.$props.mask.length > 0) {
+				} else if(this.hasMask) {
 					const MASK_MARKER = '_';
 					
 					let mask = this.$props.mask;
 					let value = this.$refs.input.value;
 					
-					if(event.key === 'Backspace') {
-						event.preventDefault();
-						if(value.length === 0) {
-							return;
-						}
-						
-						value = value.slice(0, -1);
-						
-						if(value.length > 0) {
-							let maskChar = mask[value.length - 1];
-							
-							while(value.length > 0 && maskChar !== MASK_MARKER) {
-								value = value.slice(0, -1);
-								maskChar = mask[value.length - 1];
-							}
-						}
-					} else if(event.key.length === 1) {
-						event.preventDefault();
+					if(event.key.length === 1) {
+						// event.preventDefault();
 						if(value.length >= mask.length) {
+							event.preventDefault();
 							return;
 						}
 						
@@ -229,14 +222,39 @@
 						
 						if(this.isCharValid(event.key) || maskChar === event.key) {
 							value += appendValue;
-							value += event.key;
+							this.$refs.input.value = value;
+						}
+					}
+					
+					// this.$emit('input', value);
+				}
+			},
+			
+			onKeyUp: function(event) {
+				if(this.hasMask) {
+					const MASK_MARKER = '_';
+					
+					let mask = this.$props.mask;
+					let value = this.$refs.input.value;
+					console.log(event.key);
+					
+					if(event.key.length === 1) {
+						let remainingMask = mask.substring(value.length, mask.length);
+						if(remainingMask.length > 0 && remainingMask.indexOf(MASK_MARKER) < 0) {
+							value += remainingMask;
+						}
+					} else if(event.key === 'Backspace') {
+						
+						if(value.length > 0) {
+							let maskChar = mask[value.length - 1];
 							
-							let remainingMask = mask.substring(value.length, mask.length);
-							
-							if(remainingMask.length > 0 && remainingMask.indexOf(MASK_MARKER) < 0) {
-								value += remainingMask;
+							while(value.length > 0 && maskChar !== MASK_MARKER) {
+								value = value.slice(0, -1);
+								maskChar = mask[value.length - 1];
 							}
 						}
+						
+						console.log(value);
 					}
 					
 					this.$emit('input', value);
