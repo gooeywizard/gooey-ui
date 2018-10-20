@@ -43,6 +43,8 @@
 					<div class="gw-column col-50">
 						<h5 class="gw-box-header">Readonly</h5>
 						
+						<gui-input type="tel" label="Phone Number" v-model="phoneNumber" name="phoneNumber" mask="(___) ___-____"></gui-input>
+						
 						<gui-input type="text" label="Full Name" v-model="fullName" validate="required" name="fullName" readonly="true" error-msg="Please enter your name."></gui-input>
 						
 						<gui-input type="email" label="Email Address" v-model="email" validate="required|email" name="email" readonly error-msg="Please enter your email address in the format: email@email.com"></gui-input>
@@ -209,6 +211,7 @@
 				noValidation: '',
 				noValidationBorder: '',
 				noLabel: '',
+				phoneNumber: '',
 				dropdown: '',
 				dropdownOptions: ['one','two','three','four']
 			}

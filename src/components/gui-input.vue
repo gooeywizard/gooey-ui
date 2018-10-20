@@ -19,6 +19,7 @@
 			</div>
 				
 			<div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMessage }}</div>
+			
 		</div>
 		
 	</div>
@@ -36,13 +37,20 @@
 				fieldTypes: ['text','email','password','date'],
 				highlighted: -1,
 				displayDropdown: false
+				// inputMask: null,
+				// maskedValue: ''
 			}
 		},
 
-		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options'],
+		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options','mask'],
 
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
+			// this.$data.maskValue = this.$props.value;
+			
+			// if(this.$props.type === 'tel') {
+			// 	this.$data.inputMask = '(___) ___-____';
+			// }
 		},
 		
 		computed: {
@@ -67,19 +75,42 @@
 		
 		methods: {
 			onInput: function(event) {
-				this.updateModel();
+				this.$emit('input', this.$refs.input.value);
+				// this.updateModel();
 
 				if(this.$props.options && this.$props.options.length > 0) {
 					let items = this.$props.options || [];
 					this.updateHighlighted(this.$refs.input.value, items);
 					this.$data.displayDropdown = true;
 				}
+				// console.log(event);
 			},
 			
 			updateModel: function(value) {
 				if(value === null || value === undefined) {
 					value = this.$refs.input.value;
 				}
+				
+				// if(this.$data.inputMask !== null) {
+				// 	let count = 0;
+				// 	let maskedValue = '';
+				// 	for(let i in this.$data.inputMask) {
+				// 		let char = this.$data.inputMask[i];
+				// 		// if(count >= value.length) {
+				// 		// 	break;
+				// 		// }
+						
+				// 		if(char === '_' && count < value.length) {
+				// 			maskedValue += value[count];
+				// 			count++;
+				// 		} else {
+				// 			maskedValue += char;
+				// 		}
+				// 	}
+					// 
+					// this.$data.maskedValue = maskedValue;
+				// }
+				
 				this.$emit('input', value);
 			},
 			
@@ -137,27 +168,135 @@
 			},
 
 			onKeyDown: function(event) {
-				if(event.key === 'ArrowDown') {
-					event.preventDefault();
-					this.onDownArrow();
-				} else if(event.key === 'ArrowUp') {
-					event.preventDefault();
-					this.onUpArrow();
-				} else if(event.key === 'Enter') {
-					event.preventDefault();
-					if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
-						this.updateModel(this.$props.options[this.$data.highlighted]);
-						this.$data.displayDropdown = false;
-						this.$data.highlighted = -1;
+				if(this.$props.options && this.$data.displayDropdown) {
+					if(event.key === 'ArrowDown') {
+						event.preventDefault();
+						this.onDownArrow();
+					} else if(event.key === 'ArrowUp') {
+						event.preventDefault();
+						this.onUpArrow();
+					} else if(event.key === 'Enter') {
+						event.preventDefault();
+						if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
+							this.$emit('input', this.$props.options[this.$data.highlighted]);
+							this.$data.displayDropdown = false;
+							this.$data.highlighted = -1;
+						}
+					} else if(event.key === 'Tab') {
+						if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
+							this.$emit('input', this.$props.options[this.$data.highlighted]);
+							this.$data.displayDropdown = false;
+							this.$data.highlighted = -1;
+						}
 					}
-				} else if(event.key === 'Tab') {
-					if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
-						this.updateModel(this.$props.options[this.$data.highlighted]);
-						this.$data.displayDropdown = false;
-						this.$data.highlighted = -1;
+				} else if(this.$props.mask && this.$props.mask.length > 0) {
+					const MASK_MARKER = '_';
+					
+					let mask = this.$props.mask;
+					let value = this.$refs.input.value;
+					
+					if(event.key === 'Backspace') {
+						event.preventDefault();
+						if(value.length === 0) {
+							return;
+						}
+						
+						value = value.slice(0, -1);
+						
+						if(value.length > 0) {
+							let maskChar = mask[value.length - 1];
+							
+							while(value.length > 0 && maskChar !== MASK_MARKER) {
+								value = value.slice(0, -1);
+								maskChar = mask[value.length - 1];
+							}
+						}
+					} else if(event.key.length === 1) {
+						event.preventDefault();
+						if(value.length >= mask.length) {
+							return;
+						}
+						
+						let appendValue = '';
+						
+						let maskChar = mask[value.length];
+						while(maskChar !== MASK_MARKER && maskChar !== event.key) {
+							appendValue += maskChar;
+							
+							// get next mask character
+         			maskChar = mask[value.length + appendValue.length];
+						}
+						
+						if(this.isCharValid(event.key) || maskChar === event.key) {
+							value += appendValue;
+							value += event.key;
+							
+							let remainingMask = mask.substring(value.length, mask.length);
+							
+							if(remainingMask.length > 0 && remainingMask.indexOf(MASK_MARKER) < 0) {
+								value += remainingMask;
+							}
+						}
 					}
+					
+					this.$emit('input', value);
 				}
 			},
+			
+			isCharValid: function(char) {
+				let regex = /[0-9]/;
+				return regex.test(char);
+			},
+			
+			// isCharAllowed: function(char) {
+			// 	// TODO implement character type restrictions
+			// 	let mask = this.$data.inputMask;
+			// 	let value = this.$refs.input.value;
+				
+			// 	if(mask !== null) {
+			// 		if(value.length === mask.length) {
+			// 			return false;
+			// 		}
+			// 	}
+			// 	return true;
+			// },
+			
+			// applyMask: function(char) {
+			// 	console.log(char);
+			// 	let MASK_MARKER = '_';
+				
+			// 	let mask = this.$data.inputMask;
+			// 	let value = this.$refs.input.value;
+			// 	if(mask !== null) {
+					
+			// 		let maskChar = mask[value.length];
+					
+			// 		while(maskChar !== MASK_MARKER) {
+			// 			value += maskChar;
+			// 			maskChar = mask[value.length];
+			// 		}
+					
+			// 		value += char;
+			// 	}
+				
+			// 	this.$emit('input', value);
+			// 		// let count = 0;
+			// 		// let maskedValue = '';
+			// 		// for(let i in this.$data.inputMask) {
+			// 		// 	let char = this.$data.inputMask[i];
+			// 		// 	// if(count >= value.length) {
+			// 		// 	// 	break;
+			// 		// 	// }
+						
+			// 		// 	if(char === '_' && count < value.length) {
+			// 		// 		maskedValue += value[count];
+			// 		// 		count++;
+			// 		// 	} else {
+			// 		// 		maskedValue += char;
+			// 		// 	}
+			// 		// }
+			// 	// }
+			// },
 
 			onDownArrow: function() {
 				if(!this.$props.options) {
