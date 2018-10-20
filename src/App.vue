@@ -1,5 +1,5 @@
 <template>
-  <div class="gw-body gw-column" :class="{'noscroll': displayDialog}">
+  <div class="gw-body gw-column">
 		
 		<header class="gw-header gw-column dark shadow center-h sticky">
 			<h1>GooeyUI</h1>
@@ -113,7 +113,7 @@
 				</div>
 				<div class="gw-box-body">
 					<button type="button" class="gw-btn primary" @click="toggleModal">Show Modal Dialog</button>
-					<gui-dialog v-if="displayDialog">
+					<gui-dialog v-if="displayDialog" @click-away="displayDialog = false">
 						<div slot="header">
 							<h4>Modal Header</h4>
 						</div>

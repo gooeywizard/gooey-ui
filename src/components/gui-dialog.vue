@@ -32,6 +32,7 @@ export default {
 		
 		let mask = document.createElement('div');
 			mask.classList.add('gw-dialog-mask');
+			// mask.addEventListener('click', this.onClickAway);
 			// console.log(el, elBox);
 			// console.log(el.scrollWidth, el.offsetWidth, el.offsetLeft);
 			// mask.setAttribute('style', 'width:' + elBox.width + 'px;height:' + elBox.height + 'px;x:' + elBox.x + ';y:' + elBox.y + ';');
@@ -55,8 +56,16 @@ export default {
 	},
 	
 	methods: {
-		onClickAway: function() {
-			this.$emit('click-away');
+		onClickAway: function(event) {
+			if(!event.target.closest('.gw-dialog')) {
+				this.$emit('click-away');
+				console.log('click away');
+			}
+		},
+		
+		onClickDialog: function(event) {
+			console.log('dialog');
+			event.preventDefault();
 		}
 	}
 }
