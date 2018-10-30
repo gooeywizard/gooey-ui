@@ -206,7 +206,7 @@
 					}
 				}
 			},
-
+			
 			onKeyDown: function(event) {
 				if(this.hasDropdown && this.$data.displayDropdown) {
 					if(event.key === 'ArrowDown') {
@@ -226,6 +226,22 @@
 							this.$emit('input', this.$props.options[this.$data.highlighted]);
 							this.showDropdown(false);
 						}
+					} else if(event.key === 'Escape') {
+						let found = false;
+						let value = this.$refs.input.value.toLowerCase();
+						for(let i = 0; i < this.$props.options.length; i++) {
+							let option = this.$props.options[i].toLowerCase();
+							if(value === option) {
+								this.$emit('input', option);
+								found = true;
+								break;
+							}
+						}
+						
+						if(!found) {
+							this.$emit('input', '');
+						}
+						this.showDropdown(false);
 					}
 				} else if(this.hasMask) {
 					const MASK_MARKER = '_';
