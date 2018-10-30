@@ -11,7 +11,7 @@
 						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown" @keyup="onKeyUp">
 				
 				<ul class="gw-list shadow" v-if="displayDropdown">
-					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)" @click="onClickOption(item)">
+					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)" @mousedown="onMouseDownOption" @click="onClickOption(item)">
 						{{ item }}
 					</li>
 				</ul>
@@ -87,9 +87,8 @@
 				// this.updateModel();
 
 				if(this.$props.options && this.$props.options.length > 0) {
-					let items = this.$props.options || [];
-					this.updateHighlighted(this.$refs.input.value, items);
-					this.$data.displayDropdown = true;
+					this.showDropdown();
+					this.updateHighlighted();
 				}
 				// console.log(event);
 			},
@@ -125,14 +124,44 @@
 			focusHandler: function() {
 				if(!this.$props.readonly) {
 					this.$data.hasFocus = true;
+					this.showDropdown();
 				}
 			},
 			
 			blurHandler: function() {
 				this.$data.hasFocus = false;
-				// this.$data.displayDropdown = false;
-				// this.$data.highlighted = -1;
+				
+				if(this.hasDropdown) {
+					let found = false;
+					let value = this.$refs.input.value.toLowerCase();
+					for(let i = 0; i < this.$props.options.length; i++) {
+						let option = this.$props.options[i].toLowerCase();
+						if(value === option) {
+							this.$emit('input', option);
+							found = true;
+							break;
+						}
+					}
+					
+					if(!found) {
+						this.$emit('input', '');
+					}
+				}
+				
+				this.showDropdown(false);
 			},
+			
+			showDropdown: function(show=true) {
+				if(this.hasDropdown) {
+					if(show && !this.$data.displayDropdown) {
+						this.$data.displayDropdown = true;
+						this.updateHighlighted();
+					} else if(!show && this.$data.displayDropdown) {
+						this.$data.displayDropdown = false;
+					}
+				}
+			},
+			
 			getFieldClasses: function() {
 				let input = this.fields[this.$props.name];
 
@@ -156,7 +185,10 @@
 				return { 'highlight': i === this.$data.highlighted };
 			},
 
-			updateHighlighted: function(value, items) {
+			updateHighlighted: function() {
+				let items = this.$props.options || [];
+				let value = this.$refs.input.value.toLowerCase();
+				
 				if(!value) {
 					this.$data.highlighted = -1;
 					return;
@@ -166,7 +198,7 @@
 					this.$data.highlighted = -1;
 
 					for(let i = 0; i < items.length; i++) {
-						let item = items[i];
+						let item = items[i].toLowerCase();
 						if(item.indexOf(value) >= 0) {
 							this.$data.highlighted = i;
 							return;
@@ -187,14 +219,12 @@
 						event.preventDefault();
 						if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
 							this.$emit('input', this.$props.options[this.$data.highlighted]);
-							this.$data.displayDropdown = false;
-							this.$data.highlighted = -1;
+							this.showDropdown(false);
 						}
 					} else if(event.key === 'Tab') {
 						if(this.$data.displayDropdown && this.$data.highlighted >= 0) {
 							this.$emit('input', this.$props.options[this.$data.highlighted]);
-							this.$data.displayDropdown = false;
-							this.$data.highlighted = -1;
+							this.showDropdown(false);
 						}
 					}
 				} else if(this.hasMask) {
@@ -236,7 +266,6 @@
 					
 					let mask = this.$props.mask;
 					let value = this.$refs.input.value;
-					console.log(event.key);
 					
 					if(event.key.length === 1) {
 						let remainingMask = mask.substring(value.length, mask.length);
@@ -253,8 +282,6 @@
 								maskChar = mask[value.length - 1];
 							}
 						}
-						
-						console.log(value);
 					}
 					
 					this.$emit('input', value);
@@ -335,10 +362,12 @@
 			},
 			
 			onClickOption: function(option) {
-				console.log('click', option);
 				this.updateModel(option);
-				this.$data.displayDropdown = false;
-				this.$data.highlighted = -1;
+				this.showDropdown(false);
+			},
+			
+			onMouseDownOption: function(event) {
+				event.preventDefault();
 			}
 		}
 	}
