@@ -441,12 +441,12 @@ input[readonly] {
 .success,
 .gw-btn.success,
 .gw-grid.success .gw-grid-header .gw-grid-cell {
-  background-color: #00c139;
+  background-color: #01ad33;
   color: #ffffff; }
 
 .gw-grid.success,
 .gw-grid.success .gw-grid-cell {
-  border-color: #00c139; }
+  border-color: #01ad33; }
 
 .warn,
 .gw-btn.warn,
@@ -478,8 +478,7 @@ input[readonly] {
   border: none;
   font-size: 14px;
   outline: none;
-  transition: box-shadow 0.2s;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.24), 0 1px 1px rgba(0, 0, 0, 0.12); }
+  transition: 0.2s; }
 
 .gw-btn[disabled] {
   color: #CCC; }
@@ -490,8 +489,16 @@ input[readonly] {
   /* padding: 8px;
 	margin: 3px; */ }
 
-.gw-btn:active {
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.24), 0 1px 1px rgba(0, 0, 0, 0.12); }
+.gw-btn.primary:not([disabled]):hover,
+.gw-btn.primary:focus {
+  background-color: #015fff; }
+
+.gw-btn.success:not([disabled]):hover,
+.gw-btn.success:focus {
+  background-color: #00ce37; }
+
+.gw-btn:hover:active {
+  box-shadow: none; }
 
 .gw-dialog-wrapper {
   position: fixed;
@@ -604,11 +611,8 @@ body {
 /*********************************/
 /*            Lists              */
 /*********************************/
-.gw-list {
-  margin: 6px; }
-
 .gw-list-item {
-  padding: 5px; }
+  padding: 12px; }
 
 .gw-list-item:hover,
 .gw-list-item.highlight {
