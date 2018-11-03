@@ -137,7 +137,7 @@
 					for(let i = 0; i < this.$props.options.length; i++) {
 						let option = this.$props.options[i].toLowerCase();
 						if(value === option) {
-							this.$emit('input', option);
+							this.$emit('input', this.$props.options[i]);
 							found = true;
 							break;
 						}
