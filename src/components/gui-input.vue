@@ -18,7 +18,8 @@
 			
 			</div>
 				
-			<div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMessage }}</div>
+			<!-- <div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMessage }}</div> -->
+			<div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && error">{{ errorMessage }}</div>
 			
 		</div>
 		
@@ -42,7 +43,7 @@
 			}
 		},
 
-		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options','mask'],
+		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options','mask','error'],
 
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
