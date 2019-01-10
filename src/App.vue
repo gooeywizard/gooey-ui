@@ -9,6 +9,22 @@
 		
 		<article class="gw-main-content gw-column center-h">
 			
+			<form class="gw-box shadow" @submit.prevent="validateBeforeSubmit">
+				<div class="gw-box-header">
+					<h4>Form and Field Validation</h4>
+				</div>
+				
+				<div class="gw-box-body">
+					<gui-input type="email" label="Email" v-model="validationForm.inputOne" v-validate="'required|email'" :error="errors.first('email')" name="email"></gui-input>
+					<gui-input type="text" label="Input Two" v-model="validationForm.inputTwo"></gui-input>
+					<gui-input type="text" label="Input Three" v-model="validationForm.inputThree"></gui-input>
+				</div>
+				
+				<div class="gw-box-footer">
+					<button type="submit" class="gw-btn primary">Submit</button>
+				</div>
+			</form>
+			
 			<div class="gw-box shadow">
 				<div class="gw-box-header">
 					<h4>Forms and Fields</h4>
@@ -213,13 +229,29 @@
 				noLabel: '',
 				phoneNumber: '',
 				dropdown: '',
-				dropdownOptions: ['one','Two','three','FoUr']
+				dropdownOptions: ['one','Two','three','FoUr'],
+				validationForm: {
+					inputOne: '',
+					inputTwo: '',
+					inputThree: ''
+				}
 			}
 		},
 		
 		methods: {
 			toggleModal: function() {
 				this.$data.displayDialog = !this.$data.displayDialog;
+			},
+			
+			validateBeforeSubmit: function() {
+				this.$validator.validateAll().then((result) => {
+					if(result) {
+						console.log('Form Submitted!');
+						return;
+					}
+					
+					console.log('Correct them errors!');
+				});
 			}
 		}
 	}

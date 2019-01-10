@@ -7,7 +7,7 @@
 	
 			<div class="gw-input">
 			
-				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly" v-validate="validate && !readonly ? validate : ''"
+				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly"
 						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown" @keyup="onKeyUp">
 				
 				<ul class="gw-list shadow" v-if="displayDropdown">
@@ -19,7 +19,8 @@
 			</div>
 				
 			<!-- <div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && errors.has(name) && fields[name].dirty && fields[name].touched">{{ errorMessage }}</div> -->
-			<div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && error">{{ errorMessage }}</div>
+			<!-- <div class="gw-field-feedback" v-if="validate && !readonly && errorMessage && error">{{ errorMessage }}</div> -->
+			<div class="gw-field-feedback" v-if="error">{{ error }}</div>
 			
 		</div>
 		
@@ -29,10 +30,21 @@
 <script>
 	export default {
 		name: 'gui-input',
+		
+		// $_veeValidate: {
+		// 	name() {
+		// 		console.log('TESTING', this.label);
+		// 		return this.name;
+		// 	},
+		// 	value() {
+		// 		return this.value;
+		// 	}
+		// },
 
 		data () {
 			return {
 				hasFocus: false,
+				dirty: false,
 				inputId: this._uid + '-input',
 				labelStyle: '',
 				fieldTypes: ['text','email','password','date'],
@@ -85,6 +97,7 @@
 		methods: {
 			onInput: function(event) {
 				this.$emit('input', this.$refs.input.value);
+				this.$data.dirty = true;
 				// this.updateModel();
 
 				if(this.$props.options && this.$props.options.length > 0) {
@@ -164,16 +177,25 @@
 			},
 			
 			getFieldClasses: function() {
-				let input = this.fields[this.$props.name];
-
+				let input = this.$refs.input;
+				// console.log(this);
+				// console.log(this.$validator.flags);
+				console.log(this.$props.error);
 				if(input) {
+					console.log(this);
 					return {
-						'touched': input.touched && !this.$props.readonly,
-						'untouched': input.untouched && !this.$props.readonly,
-						'dirty': input.dirty && !this.$props.readonly,
-						'pristine': input.pristine && !this.$props.readonly,
-						'invalid': input.invalid && !this.$props.readonly,
-						'valid': input.valid && !this.$props.readonly,
+						'touched': this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
+						'untouched': !this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
+						'dirty': this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
+						'pristine': !this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
+						'invalid': this.$props.error && !this.$props.readonly && !this.$props.disabled,
+						'valid': !this.$props.error && !this.$props.readonly && !this.$props.disabled,
+						// 'touched': input.touched && !this.$props.readonly,
+						// 'untouched': input.untouched && !this.$props.readonly,
+						// 'dirty': input.dirty && !this.$props.readonly,
+						// 'pristine': input.pristine && !this.$props.readonly,
+						// 'invalid': input.invalid && !this.$props.readonly,
+						// 'valid': input.valid && !this.$props.readonly,
 						'has-focus': this.$data.hasFocus,
 						'has-value': this.$props.value && this.$props.value.length > 0 || this.$props.readonly
 					};
