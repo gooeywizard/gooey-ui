@@ -15,6 +15,8 @@
 						{{ item }}
 					</li>
 				</ul>
+				
+				<g-date-picker v-if="displayDatePicker" :date="value" @select="onSelectDate"></g-date-picker>
 			
 			</div>
 				
@@ -28,6 +30,8 @@
 </template>
 
 <script>
+	import GDatePicker from './g-date-picker'
+
 	export default {
 		name: 'gui-input',
 		
@@ -49,16 +53,22 @@
 				labelStyle: '',
 				fieldTypes: ['text','email','password','date'],
 				highlighted: -1,
-				displayDropdown: false
+				displayDropdown: false,
+				displayDatePicker: false
 				// inputMask: null,
 				// maskedValue: ''
 			}
+		},
+		
+		components: {
+			GDatePicker
 		},
 
 		props: ['label','validate','type','name','error-msg','readonly','value','label-width','options','mask','error'],
 
 		created() {
 			this.$data.labelStyle = 'width: ' + this.$props.labelWidth;
+			// this.showDatePicker();
 			// this.$data.maskValue = this.$props.value;
 			
 			// if(this.$props.type === 'tel') {
@@ -91,6 +101,10 @@
 			
 			hasDropdown() {
 				return this.$props.options && this.$props.options.length > 0;
+			},
+			
+			hasDatePicker() {
+				return this.$props.type === 'date';
 			}
 		},
 		
@@ -135,10 +149,17 @@
 				this.$emit('input', value);
 			},
 			
+			onSelectDate: function(date) {
+				console.log('test');
+				this.updateModel(date);
+				this.showDatePicker(false);
+			},
+			
 			focusHandler: function() {
 				if(!this.$props.readonly) {
 					this.$data.hasFocus = true;
 					this.showDropdown();
+					this.showDatePicker();
 				}
 			},
 			
@@ -163,6 +184,7 @@
 				}
 				
 				this.showDropdown(false);
+				this.showDatePicker(false);
 			},
 			
 			showDropdown: function(show=true) {
@@ -176,13 +198,23 @@
 				}
 			},
 			
+			showDatePicker: function(show=true) {
+				if(this.hasDatePicker) {
+					if(show && !this.$data.displayDatePicker) {
+						this.$data.displayDatePicker = true;
+					} else if(!show && this.$data.displayDatePicker) {
+						this.$data.displayDatePicker = false;
+					}
+				}
+			},
+			
 			getFieldClasses: function() {
 				let input = this.$refs.input;
 				// console.log(this);
 				// console.log(this.$validator.flags);
-				console.log(this.$props.error);
+				// console.log(this.$props.error);
 				if(input) {
-					console.log(this);
+					// console.log(this);
 					return {
 						'touched': this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
 						'untouched': !this.$data.dirty && !this.$props.readonly && !this.$props.disabled,
@@ -231,6 +263,12 @@
 			},
 			
 			onKeyDown: function(event) {
+				if(this.hasDatePicker && this.$data.displayDatePicker) {
+					if(event.key === 'Escape') {
+						this.showDatePicker(false);
+					}
+				}
+				
 				if(this.hasDropdown && this.$data.displayDropdown) {
 					if(event.key === 'ArrowDown') {
 						event.preventDefault();
@@ -406,6 +444,7 @@
 			},
 			
 			onMouseDownOption: function(event) {
+				console.log('test');
 				event.preventDefault();
 			}
 		}
@@ -425,4 +464,17 @@
 .gw-list-item {
 
 }
+
+/* hide default date input stuff */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+	-webkit-appearance: none;
+	display: none;
+}
+
+input[type="date"]::-ms-clear {
+	display: none;
+}
+
 </style>
