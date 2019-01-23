@@ -34,6 +34,8 @@
 					
 					<div class="gw-column col-50">
 						<h5 class="gw-box-header">Editable</h5>
+						
+						<gui-input></gui-input>
 
 						<gui-input type="text" label="Dropdown" v-model="dropdown" :options="dropdownOptions" name="dropdown"></gui-input>
 						

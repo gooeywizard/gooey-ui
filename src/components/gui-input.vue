@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import GDatePicker from './g-date-picker'
+	import GDatePicker from './g-date-picker.vue'
 
 	export default {
 		name: 'gui-input',

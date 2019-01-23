@@ -65,6 +65,7 @@ export default {
 		},
 		
 		monthAndYear: function() {
+			console.log(DateUtil);
 			return DateUtil.monthName(this.$data.currentDate) + ', ' + this.$data.currentDate.getFullYear();
 		}
   },

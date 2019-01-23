@@ -3,26 +3,27 @@ import StringUtil from './StringUtil.js'
 const MONTH_NAME = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-const DateUtil = class {
+const DateUtil = {
 	
-	static monthName(date) {
+	monthName: function(date) {
 		return MONTH_NAME[date.getMonth()];
-	}
+	},
 	
-	static monthAbbr(date) {
+	monthAbbr: function(date) {
 		return MONTH_ABBR[date.getMonth()];
-	}
+	},
 	
-	static toString(date, format) {
-		let day = StringUtil.leftPad(date.getDate(), '0', 2);
+	toString: function(date, format) {
+		console.log(StringUtil);
+		var day = StringUtil.leftPad(date.getDate(), '0', 2);
 		let month = StringUtil.leftPad(date.getMonth() + 1, '0', 2);
 		let year = date.getFullYear();
 		
 		// return month + '/' + day + '/' + year;
 		return year + '-' + month + '-' + day;
-	}
+	},
 	
-	static toDate(value) {
+	toDate: function(value) {
 		if(value instanceof Date) {
 			return value;
 		}
@@ -32,31 +33,31 @@ const DateUtil = class {
 		}
 		
 		throw new Error('Invalid date: ' + value);
-	}
+	},
 	
-	static daysInMonth(date) {
+	daysInMonth: function(date) {
 		date = DateUtil.toDate(date);
 		
 		date = new Date(date.getFullYear(), date.getMonth()+1, 0);
 		
 		return date.getDate();
-	}
+	},
 	
-	static firstDayOfMonth(date) {
+	firstDayOfMonth: function(date) {
 		date = DateUtil.toDate(date);
 		
 		date = new Date(date.getFullYear(), date.getMonth(), 1);
 		
 		return date.getDay();
-	}
+	},
 	
-	static weekOfMonth(date) {
+	weekOfMonth: function(date) {
 		let firstDay = DateUtil.firstDayOfMonth(date);
 		
 		return Math.floor((date.getDate() + firstDay) / 7);
-	}
+	},
 	
-	static weeksInMonth(date) {
+	weeksInMonth: function(date) {
 		let daysInMonth = DateUtil.daysInMonth(date);
 		
 		date = new Date(date.getFullYear(), date.getMonth(), daysInMonth - 1);

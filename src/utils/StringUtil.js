@@ -1,6 +1,6 @@
-const StringUtil = class {
+const StringUtil = {
 	
-	static leftPad(value, pad, length) {
+	leftPad: function(value, pad, length) {
 		if(!pad || !length) {
 			throw new Error('Invalid params: pad = ' + pad + ', length = ' + length);
 		}
