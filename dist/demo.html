@@ -1,17 +1,17 @@
 <meta charset="utf-8">
 <title>gooey-ui demo</title>
-<script src="https://unpkg.com/vue"></script>
-<script src="./gooey-ui.umd.js"></script>
-<link rel="stylesheet" href="./gooey-ui.css">
+<script src="https://unpkg.com/vue@latest"></script>
+<script src="gooey-ui.umd.js"></script>
+<link rel="stylesheet" href="gooey-ui.css">
 
-<div id="app">
-  <demo></demo>
-</div>
+<body>
+	<div id="app">Test</div>
+	<script>
+	Vue.use(window['gooey-ui'].default);
 
-<script>
-new Vue({
-  components: {
-    demo: gooey-ui
-  }
-}).$mount('#app')
-</script>
+	new Vue({
+		el: '#app',
+		template: '<div>Template</div>'
+	});
+	</script>
+</body>
