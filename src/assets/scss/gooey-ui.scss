@@ -6,9 +6,29 @@
 @import 'button';
 @import 'dialog';
 
+
+
+/*********************************/
+/*            General            */
+/*********************************/
+
+html, body {
+	height: 100vh;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+
+
 /*********************************/
 /*           Modifiers           */
 /*********************************/
+
+.g-fill {
+	flex: 1;
+}
 
 .text-center {
 	text-align: center;
@@ -60,15 +80,6 @@ p:last-of-type {
 	box-shadow: 0 -1px 0 #e5e5e5,
 		0 0 2px rgba(0, 0, 0, .12),
 		0 2px 4px rgba(0, 0, 0, .24);
-}
-
-html, body {
-	height: 100vh;
-}
-
-body {
-	background-color: #EEE;
-	font-family: 'Roboto', sans-serif;
 }
 
 
