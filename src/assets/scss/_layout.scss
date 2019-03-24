@@ -11,15 +11,16 @@
 .g-main {
 	display: flex;
 	flex-direction: row;
-	height: 100%;
+	// height: 100%;
 	position: relative;
+	flex: 1;
 }
 
 .g-main-content {
 	display: flex;
 	flex-direction: column;
 	max-width: 800px;
-	align-self: center;
+	// align-self: center;
 	flex: 1;
 	padding: 24px;
 }
@@ -118,20 +119,52 @@
 
 
 /*********************************/
-/*       Sidebar, Article        */
+/*       Sidebar, Nav        */
 /*********************************/
 
 .g-sidebar {
-	width: 160px;
-	padding: 12px;
+	width: 200px;
+	background-color: #dddddd;
+	color: #000000;
 }
 
-.g-sidebar-content.g-sticky {
+.g-sidebar-content {
+	padding: 24px;
+}
+
+.g-sidebar.sticky .g-sidebar-content {
 	position: sticky;
+	top: 0px;
+	// max-height: 100vh;
+	// overflow-y: auto;
 }
 
-.g-sidebar-content.g-stuck {
+.g-sidebar.stuck {
 	position: fixed;
+	top: 0px;
+	// max-height: 100vh;
+	// overflow-y: auto;
+}
+
+// .g-sidebar-content.g-sticky {
+// 	position: sticky;
+// }
+
+// .g-sidebar-content.g-stuck {
+// 	position: fixed;
+// }
+
+.g-nav {
+	
+}
+
+.g-nav-item {
+	padding: 8px;
+}
+
+.g-nav-item:hover {
+	background-color: #999999;
+	color: #ffffff;
 }
 
 

@@ -37,13 +37,13 @@ body {
 h1,
 .gw-title {
 	font-size: 60px;
-	margin: 24px;
+	margin: 24px 0px;
 }
 
 h2,
 .gw-subtitle {
 	font-size: 40px;
-	margin: 12px;
+	margin: 12px 0px;
 }
 
 h3 {
@@ -67,9 +67,9 @@ p {
 	margin-bottom: 20px;
 }
 
-p:last-of-type {
-	margin-bottom: initial;
-}
+// p:last-of-type {
+// 	margin-bottom: initial;
+// }
 
 .gw-content {
 	font-size: 16px;
