@@ -14,22 +14,22 @@
 			<button class="gw-btn">{{ monthAndYear }}</button>
 			<button class="gw-btn" @mousedown="onMouseDownDate" @click="nextMonth">&#x3e;</button>
 		</div>
-    <div class="gw-row" v-for="week in weeksInMonth" :key="week">
-      <div class="g-day selectable"
-           :class="dayClass(dayOfWeek, week)"
-           v-for="dayOfWeek in 7"
-           :key="dayOfWeek"
-					  @mousedown="onMouseDownDate"
-						@click="onClickDate(dayOfWeek, week)">
-        <span v-if="day(dayOfWeek,week) <= 0" class="other-month">{{ day(dayOfWeek,week) + daysInPrevMonth }}</span>
-        <span v-if="isDayInMonth(dayOfWeek,week)">{{ day(dayOfWeek,week) }}</span>
-        <span v-if="day(dayOfWeek,week) > daysInMonth" class="other-month">{{ day(dayOfWeek,week) - daysInMonth }}</span>
-      </div>
-    </div>
+		<div class="gw-row" v-for="week in weeksInMonth" :key="week">
+			<div class="g-day selectable"
+					:class="dayClass(dayOfWeek, week)"
+					v-for="dayOfWeek in 7"
+					:key="dayOfWeek"
+					@mousedown="onMouseDownDate"
+					@click="onClickDate(dayOfWeek, week)">
+				<span v-if="day(dayOfWeek,week) <= 0" class="other-month">{{ day(dayOfWeek,week) + daysInPrevMonth }}</span>
+				<span v-if="isDayInMonth(dayOfWeek,week)">{{ day(dayOfWeek,week) }}</span>
+				<span v-if="day(dayOfWeek,week) > daysInMonth" class="other-month">{{ day(dayOfWeek,week) - daysInMonth }}</span>
+			</div>
+		</div>
 		<div class="gw-row center-h">
 			<button class="gw-btn">Today</button>
 		</div>
-  </div>
+	</div>
 </template>
 
 <script>
@@ -47,45 +47,45 @@ export default {
 	props: ['date'],
 	
 	computed: {
-    weeksInMonth: function() {
-      return DateUtil.weeksInMonth(this.$data.currentDate);
-    },
-    
-    monthPad: function() {
-      return DateUtil.firstDayOfMonth(this.$data.currentDate);
-    },
-    daysInMonth: function() {
-      return DateUtil.daysInMonth(this.$data.currentDate);
-    },
-    
-    daysInPrevMonth: function() {
-      let prevMonth = new Date(this.$data.currentDate);
-      prevMonth.setMonth(prevMonth.getMonth() - 1);
-      return DateUtil.daysInMonth(prevMonth);
+		weeksInMonth: function() {
+			return DateUtil.weeksInMonth(this.$data.currentDate);
+		},
+		
+		monthPad: function() {
+			return DateUtil.firstDayOfMonth(this.$data.currentDate);
+		},
+		daysInMonth: function() {
+			return DateUtil.daysInMonth(this.$data.currentDate);
+		},
+		
+		daysInPrevMonth: function() {
+			let prevMonth = new Date(this.$data.currentDate);
+			prevMonth.setMonth(prevMonth.getMonth() - 1);
+			return DateUtil.daysInMonth(prevMonth);
 		},
 		
 		monthAndYear: function() {
-			console.log(DateUtil);
+			// console.log(DateUtil);
 			return DateUtil.monthName(this.$data.currentDate) + ', ' + this.$data.currentDate.getFullYear();
 		}
-  },
+	},
 	
 	created() {
 		if(this.$props.date) {
-			console.log(this.$props.date);
+			// console.log(this.$props.date);
 			this.$data.currentDate = new Date(this.$props.date);
-			console.log(this.$data.currentDate.getDate());
+			// console.log(this.$data.currentDate.getDate());
 		} else {
 			this.$data.currentDate = new Date();
 		}
 	},
 	
 	methods: {
-    day: function(dayOfWeek, week) {
-      return (week - 1) * 7 + dayOfWeek - this.monthPad;
+		day: function(dayOfWeek, week) {
+			return (week - 1) * 7 + dayOfWeek - this.monthPad;
 		},
 		
-    dayClass: function(dayOfWeek, week) {
+		dayClass: function(dayOfWeek, week) {
 			let active = new Date(this.$props.date);
 			let current = this.$data.currentDate;
 			
@@ -93,13 +93,13 @@ export default {
 				return {};
 			}
 			
-      return {
-        'active': this.day(dayOfWeek, week) === active.getDate() + 1
-      };
-    },
-    
-    isDayInMonth: function(dayOfWeek, week) {
-      return this.day(dayOfWeek,week) > 0 && this.day(dayOfWeek,week) <= this.daysInMonth;
+			return {
+				'active': this.day(dayOfWeek, week) === active.getDate() + 1
+			};
+		},
+		
+		isDayInMonth: function(dayOfWeek, week) {
+			return this.day(dayOfWeek,week) > 0 && this.day(dayOfWeek,week) <= this.daysInMonth;
 		},
 		
 		onClickDate: function(dayOfWeek, week) {
@@ -114,14 +114,14 @@ export default {
 			event.preventDefault();
 		},
 		
-		prevMonth: function(event) {
+		prevMonth: function() {
 			let date = new Date(this.$data.currentDate);
 			date.setMonth(this.$data.currentDate.getMonth() - 1);
 			
 			this.$data.currentDate = date;
 		},
 		
-		nextMonth: function(event) {
+		nextMonth: function() {
 			let date = new Date(this.$data.currentDate);
 			date.setMonth(this.$data.currentDate.getMonth() + 1);
 			
@@ -132,7 +132,7 @@ export default {
 			this.$emit('select', DateUtil.toString(new Date(), 'mm/dd/yyyy'));
 			// this.$emit('select', new Date());
 		}
-  }
+	}
 }
 </script>
 

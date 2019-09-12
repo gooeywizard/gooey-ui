@@ -5,16 +5,14 @@
 </template>
 
 <script>
-	export default {
-		name: 'gui-list',
-		data () {
-			return {
-			}
-		},
-		props: [],
-  	methods: {
-		}
-	}
+export default {
+	name: 'gui-list',
+	data() {
+		return {};
+	},
+	props: [],
+	methods: {}
+}
 </script>
 
 <style scoped>

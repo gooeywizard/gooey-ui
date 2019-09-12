@@ -248,11 +248,11 @@
 			validateBeforeSubmit: function() {
 				this.$validator.validateAll().then((result) => {
 					if(result) {
-						console.log('Form Submitted!');
+						// console.log('Form Submitted!');
 						return;
 					}
 					
-					console.log('Correct them errors!');
+					// console.log('Correct them errors!');
 				});
 			}
 		}

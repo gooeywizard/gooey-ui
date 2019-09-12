@@ -13,8 +13,8 @@ const DateUtil = {
 		return MONTH_ABBR[date.getMonth()];
 	},
 	
-	toString: function(date, format) {
-		console.log(StringUtil);
+	toString: function(date) {
+		// TODO: add format option
 		var day = StringUtil.leftPad(date.getDate(), '0', 2);
 		let month = StringUtil.leftPad(date.getMonth() + 1, '0', 2);
 		let year = date.getFullYear();

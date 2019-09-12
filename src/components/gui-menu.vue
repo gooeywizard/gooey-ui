@@ -1,5 +1,5 @@
 <template>
-  <div class="gw-menu-container">
+	<div class="gw-menu-container">
 		<button type="button" class="gw-menu-btn gw-btn" :class="getButtonClasses()" @click="toggleMenu" @blur="closeMenu">Menu</button>
 		<ul class="gw-menu" v-show="menuOpen">
 			<slot></slot>
@@ -16,7 +16,7 @@
 			}
 		},
 		props: [],
-  	methods: {
+		methods: {
 			toggleMenu: function() {
 				this.$data.menuOpen = !this.$data.menuOpen;
 			},

@@ -59,12 +59,12 @@ export default {
 		onClickAway: function(event) {
 			if(!event.target.closest('.gw-dialog')) {
 				this.$emit('click-away');
-				console.log('click away');
+				// console.log('click away');
 			}
 		},
 		
 		onClickDialog: function(event) {
-			console.log('dialog');
+			// console.log('dialog');
 			event.preventDefault();
 		}
 	}
