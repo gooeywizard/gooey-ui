@@ -109,7 +109,7 @@
 		},
 		
 		methods: {
-			onInput: function(event) {
+			onInput: function() {
 				this.$emit('input', this.$refs.input.value);
 				this.$data.dirty = true;
 				// this.updateModel();
@@ -150,7 +150,6 @@
 			},
 			
 			onSelectDate: function(date) {
-				console.log('test');
 				this.updateModel(date);
 				this.showDatePicker(false);
 			},
@@ -324,7 +323,7 @@
 							appendValue += maskChar;
 							
 							// get next mask character
-         			maskChar = mask[value.length + appendValue.length];
+							maskChar = mask[value.length + appendValue.length];
 						}
 						
 						if(this.isCharValid(event.key) || maskChar === event.key) {
@@ -444,7 +443,6 @@
 			},
 			
 			onMouseDownOption: function(event) {
-				console.log('test');
 				event.preventDefault();
 			}
 		}
