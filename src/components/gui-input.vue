@@ -10,13 +10,13 @@
 				<input :type="type" ref="input" :id="inputId" :value="value" :name="name" :readonly="readonly"
 						@focus="focusHandler" @blur="blurHandler" @input="onInput" @keydown="onKeyDown" @keyup="onKeyUp">
 				
-				<ul class="gw-list shadow" v-if="displayDropdown">
+				<ul class="gw-list shadow" v-show="displayDropdown">
 					<li class="gw-list-item" v-for="(item, i) in options" :key="i" :class="getHighlightedClass(i)" @mousedown="onMouseDownOption" @click="onClickOption(item)">
 						{{ item }}
 					</li>
 				</ul>
 				
-				<g-date-picker v-if="displayDatePicker" :date="value" @select="onSelectDate"></g-date-picker>
+				<g-date-picker v-show="displayDatePicker" :date="value" @select="onSelectDate"></g-date-picker>
 			
 			</div>
 				
