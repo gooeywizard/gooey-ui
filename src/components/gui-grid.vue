@@ -18,7 +18,7 @@
 	const DESC = 'desc';
 	
 	export default {
-		name: 'gw-input',
+		name: 'gui-grid',
 		data () {
 			return {
 				sortedData: [],
